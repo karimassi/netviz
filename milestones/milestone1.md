@@ -37,7 +37,8 @@ Note: if we think some information are missing we plan on retrieving it from an 
 
 ## Exploratory Data Analysis
 
-In [this notebook](eda.ipynb), you will find some initial exploratory work on our data. It is also available [here](eda.md) under a nicer markdown format
+In [this notebook](eda.ipynb), you will find some initial exploratory work on our data. It is also available [here](eda.md) under a nicer markdown format.
+
 We show some insights and preliminary findings about the scrapped Netflix catalogue. 
 Since we scrapped the data ourselves, the amount of missing values is negligible. 
 
