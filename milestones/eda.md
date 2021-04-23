@@ -2,6 +2,9 @@
 ## Exploratory Data Analysis
 
 
+
+
+
 <div>
 <table border="1" class="dataframe">
   <thead>
@@ -243,7 +246,7 @@ As well as proposing frequent releases for different type of viewers, their cont
     
 
 
-Clearly the 2 most represented genres in the streaming platform's library are Drama and Comedy.
+Clearly the 2 most represented genres in the streaming platform's library are `Drama` and `Comedy`.
 
 ### Number of items per genre, per release date
 
@@ -285,7 +288,7 @@ Not all content available on Netflix is well rated on online movies and tv shows
 
 Clearly, we can note that the names and the order in the top-20 actors occurrences differs from the previous part. There are more Asian actors in this ranking than in the previous one.
 
-### Most represented genres in top-graded items
+### Most represented genres in top-rated items
 
 We know that the most represented genres in the Netflix's catalogue are Drama and Comedy. Let's see if it is still the case in the top-1000 rated movies according to IMDb.
 
