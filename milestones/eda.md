@@ -2,9 +2,6 @@
 ## Exploratory Data Analysis
 
 
-
-
-
 <div>
 <table border="1" class="dataframe">
   <thead>
@@ -298,11 +295,11 @@ We know that the most represented genres in the Netflix's catalogue are Drama an
     
 
 
-Drama and comedy are still the most represented genres, even though the Drama one really dominates all the other genres.
+`Drama` and `Comedy` are still the most represented genres, even though the Drama one really dominates all the other genres.
 
-### Cumulative amount of each genre over the years
+### Cummulative distribution of genres over the years
 
-Netflix's library has grown over the years. Let's see how the diversity of its catalogue has evolved since April 2015.
+Netflix's library has grown over the years. Let's see how the diversity of its catalogue has evolved since April 2015. At each point in time the plot represents the share of each genre in the Netflix catalogue. Some titles from the catalogue have multiple genres, therefore we do a weighted sum, so that the weight of all the genres for each title sums up to 1.
 
 
     
@@ -310,8 +307,4 @@ Netflix's library has grown over the years. Let's see how the diversity of its c
     
 
 
-
-    
-![png](eda_files/eda_42_0.png)
-    
-
+As seen before, the most represented genres are `Drama` and `Comedy`. The genres that have a share lower than 5% are included in the category `Other`.
