@@ -1,4 +1,4 @@
-const { src, dest, series, watch, parallel } = require('gulp')
+const { src, dest, series, watch, parallel, task } = require('gulp')
 
 const babel = require('gulp-babel')
 const plumber = require('gulp-plumber')
@@ -8,12 +8,16 @@ const webServer = require('gulp-webserver')
 const browserSync = require('browser-sync').create()
 const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
+const ghPages = require('gulp-gh-pages')
 
 const files = {
   js: 'app/js/**/*.js',
   css: ['app/css/**/*.css', 'app/css/**/*.sass', 'app/css/**/*.scss'],
   html: 'app/**/*.html'
 }
+
+task('deploy', () => src('./dist/**/*').pipe(ghPages()));
+
 
 // function serve() {
 //   webServer({
