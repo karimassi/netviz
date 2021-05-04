@@ -19,19 +19,6 @@ const files = {
   html: 'app/**/*.html'
 }
 
-task('deploy', () => src('./dist/**/*').pipe(ghPages()));
-
-
-// function serve() {
-//   webServer({
-//       livereload: true,
-//       directoryListing: true,
-//       open: true,
-//       host: 'localhost',
-//       port: 21345,
-//   })
-// }
-
 function syncBrowser() {
   browserSync.init({
     server: {
@@ -85,8 +72,30 @@ function includeCssDependencies() {
     .pipe(dest('dist/css'))
 }
 
+function build() {
+  return series(
+    parallel(includeJsDependencies, includeCssDependencies),
+    parallel(prepareJs, prepareCss, prepareHTML)
+  )
+}
+
+function pushToGitPages() {
+  return src('./dist/**/*')
+    .pipe(ghPages({
+      branch: "gh-pages"
+    }))
+}
+
+function deploy() {
+  return series(
+    build(),
+    pushToGitPages
+  )
+}
+
+exports.build = build()
+exports.deploy = deploy()
 exports.default = series(
-  parallel(includeJsDependencies, includeCssDependencies),
-  parallel(prepareJs, prepareCss, prepareHTML),
+  build(),
   parallel(watchFiles, syncBrowser)
 )
