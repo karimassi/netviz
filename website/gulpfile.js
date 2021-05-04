@@ -64,7 +64,7 @@ function prepareCss() {
       .pipe(sass())
       .pipe(autoprefixer())
     .pipe(sourcemaps.write('./'))
-    .pipe(dest('dist/js'))
+    .pipe(dest('dist/css'))
 }
 
 function prepareHTML() {
