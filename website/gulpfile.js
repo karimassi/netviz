@@ -16,6 +16,15 @@ const files = {
   html: 'app/**/*.html'
 }
 
+const DEPENDENCIES = {
+  js: [
+    `fullpage.js/dist/fullpage.min.js`
+  ],
+  css: [
+    `fullpage.js/dist/fullpage.min.css`
+  ]
+}
+
 task('deploy', () => src('./dist/**/*').pipe(ghPages()));
 
 
@@ -45,7 +54,7 @@ function prepareJs() {
       .pipe(babel())
       .pipe(uglify())
     .pipe(sourcemaps.write('./'))
-    .pipe(dest('dist'))
+    .pipe(dest('dist/js'))
 }
 
 function prepareCss() {
@@ -55,7 +64,7 @@ function prepareCss() {
       .pipe(sass())
       .pipe(autoprefixer())
     .pipe(sourcemaps.write('./'))
-    .pipe(dest('dist'))
+    .pipe(dest('dist/js'))
 }
 
 function prepareHTML() {
@@ -69,7 +78,21 @@ function watchFiles() {
   watch(files.html, prepareHTML)
 }
 
+NODE_MODULES_DIR = 'node_modules'
+let getModule = x => `${NODE_MODULES_DIR}/${x}`
+
+function includeJsDependencies() {
+  return src(DEPENDENCIES.js.map(getModule))
+    .pipe(dest('dist/js'))
+}
+
+function includeCssDependencies() {
+  return src(DEPENDENCIES.css.map(getModule))
+    .pipe(dest('dist/css'))
+}
+
 exports.default = series(
+  parallel(includeJsDependencies, includeCssDependencies),
   parallel(prepareJs, prepareCss, prepareHTML),
   parallel(watchFiles, syncBrowser)
 )
