@@ -9,20 +9,14 @@ const browserSync = require('browser-sync').create()
 const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
 const ghPages = require('gulp-gh-pages')
+const DEPENDENCIES = require('./dependencies.js')
+
+console.log(DEPENDENCIES)
 
 const files = {
   js: 'app/js/**/*.js',
   css: ['app/css/**/*.css', 'app/css/**/*.sass', 'app/css/**/*.scss'],
   html: 'app/**/*.html'
-}
-
-const DEPENDENCIES = {
-  js: [
-    `fullpage.js/dist/fullpage.min.js`
-  ],
-  css: [
-    `fullpage.js/dist/fullpage.min.css`
-  ]
 }
 
 task('deploy', () => src('./dist/**/*').pipe(ghPages()));
