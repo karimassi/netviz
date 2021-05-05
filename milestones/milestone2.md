@@ -3,7 +3,7 @@
 Through our visualization, we would like to show how Netflix's release strategy evolved during the last few years. We will first introduce the dataset by showing basic insights about the content, and a first look at Netflix's release trends. In the past few years, Netflix expanded its operations to more and more countries. We'll next dive into the geographical and cultural expansion of the service, and how its library was updated accordingly. Such an expansion came with a adaptation of the content they offer, to adapt to their new cultural markets. We will finally look into the evolution of the content itself, in order to satisfy the growing demand.  
 
 > Generally throughout the project we will require the following lectures, that we will not mention under each visualization:
-> - The web development and D3 lectures to build the website and the core of our visualizations, along with the desigin vis
+> - The web development and D3 lectures to build the website and the core of our visualizations, along with the one about desiging visualizations.
 > - The lecture on tabular data since it is the format our data is represented with. 
 > - The lecture on storytelling, since it is important to have a meaningful narrative which answers our problematic in a structured way. 
 
