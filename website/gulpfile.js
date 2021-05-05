@@ -13,7 +13,7 @@ const DEPENDENCIES = require('./dependencies.js')
 
 const files = {
   js: 'app/js/**/*.js',
-  css: ['app/css/*.css', 'app/css/*.sass', 'app/css/*.scss'],
+  css: ['app/css/**/*.css', 'app/css/**/*.sass', 'app/css/**/*.scss'],
   html: 'app/**/*.html'
 }
 
@@ -23,7 +23,7 @@ function syncBrowser() {
       baseDir: "./dist"
     }
   });
-  browserSync.watch("./dist/*").on('change', browserSync.reload)
+  browserSync.watch("./dist/**/*").on('change', browserSync.reload)
 }
 
 function prepareJs() {
@@ -72,7 +72,7 @@ function includeCssDependencies() {
 
 function build() {
   return series(
-    parallel(includeJsDependencies, includeCssDependencies),
+    // parallel(includeJsDependencies, includeCssDependencies),
     parallel(prepareJs, prepareCss, prepareHTML)
   )
 }
