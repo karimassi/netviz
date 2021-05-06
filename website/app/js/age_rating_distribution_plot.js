@@ -16,7 +16,7 @@ $(() => {
 
 function createAgeRatingDistriutionPlot(svg, data) {
   const main_color = 'whitesmoke';
-  let [sizeX, sizeY] = [700, 500]
+  let [sizeX, sizeY] = [800, 500]
   svg.attr('viewBox', `0 0 ${sizeX} ${sizeY}`)
 
   const MID_SIZE = 50

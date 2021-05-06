@@ -10,6 +10,12 @@ h2 {
   text-align: center;
 }
 
+.justified-text {
+  color: whitesmoke;
+  text-align:justify;
+  text-align-last: center;
+}
+
 #fullpage > .section {
   .container > div {
     margin: 40px 0;
@@ -35,6 +41,10 @@ h2 {
         top: 33px;
       }
     }
+  }
+
+  .section-body {
+    text-align: center;
   }
 }
 
