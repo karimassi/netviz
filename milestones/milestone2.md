@@ -37,37 +37,40 @@ Naturally, what follows the languages are the countries. Neflix is available in 
   <img width="600" height="450" src="sketches/worldwide.jpg"></img>
 </p>
 
+<br></br>
+
 <img align="right" width="400" height="300" src="sketches/network.jpg"></img>
 
 Finally, the addition of new content in new countries means the network of actors on the platform grew in size. Can we distinguish language communities by looking at such a network? In this part, we will last show a graph were the nodes represent movies, and an edge links two movies if they share a common actor (give a higher weight if more than one). Using community detection, we will display the graph in a way that movies are clustered depending on their original language. This graph will be animated as follows: at the start, all the graph is shown, but all the items are grayed-out. As time passes, movies released will lighten-up, and their respective connections too. At the end of the timeline, the whole graph will be visible. Under the visualization, there will be a Netflix-style action bar, where the user can pause/play, restart and navigate though the animation. 
 > We will need `networkX` to build and analyse the graph, then `D3` and a graph visualization tool like `cytoscape` or `sigma`. The lecture about graphs will be needed for this part.
 
-<br></br>
-
 ## Content evolution
 
 To meet the growing demand that came following the expansion, Netflix had to adapt their content to keep their new customers. This means that they had to produce and publish content accessible to all groups, in-line with seasonal events, and that matches people's taste.
 
-<img align="right" width="400" height="300" src="sketches/wordcloud.jpg"></img>
+<img align="left" width="400" height="300" src="sketches/wordcloud.jpg"></img>
 
 It would be interesting to find the most popular topics among movies and series, depending on the time of the year. You don't want to miss cheesy Valentines movies, do you? We will show, using word clouds, the results of topic extraction on the items' description. The plot will be animated over the 12 months, and will show one word cloud at a time. Under the visualization, there will be a Netflix-style action bar, where the user can pause/play, restart and navigate though the animation. 
 > For this vizualization, we will need `D3` and the `d3-cloud` plugin. The lecture on text visualization will be useful here. 
 
 <br></br>
+<br></br>
 
-<img align="left" width="400" height="300" src="sketches/ages.jpg"></img>
+<img align="right" width="400" height="300" src="sketches/ages.jpg"></img>
 
 
 Netflix is a great source of enterainment for teenagers and younger children. However, content appropriate to their ages should be available in order not to upset their parents. Let's see if Netflix made sure this is the case. I this visualization, we will show the proportion of all content each age rating occupies at a given point in time. Using a bar plot (similar to an age-distribution pyramid plot), we will show this while making distinguishing movies from series. The plot will be animated over time. Under it, there will be a Netflix-style action bar, where the user can pause/play, restart and navigate though the animation. 
 > We will need `D3` for this visualization.
 
+<br></br>
+<br></br>
+
+<img align="left" width="400" height="300" src="sketches/genres.jpg"></img>
+
 Finally, we expect content to provide us with content that feeds our craving for spicy Dramas on Tuesday evenings, and our lust for comedies on week-end mornings. The content's genres could also be seasonal. Using a Sankey diagram, we will show the repartition of content across months and genres. Sankey diagrams can quickly become cluttered. Therefore, when selecting a month, the vizualization will highlight all flow outgoing from that month, into the corresponding genres. Similarly, when selecting a genre, the flow to all the corresponding months will be highlighted. Moreover, the plot will be animated, so that we can visualize differences in across years. 
 > We will need `D3` and the `d3-sankey` plugin. The lectures on maps and graphs might come in handy in this case.
 
-<p align="center">
-  <img width="400" height="300" src="sketches/genres.jpg"></img>
-</p>
-
+<br></br>
 
 ## Exploration tool
 
@@ -78,5 +81,5 @@ After leading the user down our storyline, it's time to set her free, and let he
 > This plot will require `D3`, and some map visualization tool. The lectures about maps will come in handy.
 
 <p align="center">
-  <img height="600" src="sketches/explore.jpg"></img>
+  <img height="700" src="sketches/explore.jpg"></img>
 </p>
