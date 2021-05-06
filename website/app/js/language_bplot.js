@@ -12,7 +12,7 @@ var audio = d3.selectAll("#most-languages")
     .attr("transform",
           "translate(" + margin_audio.left + "," + margin_audio.top + ")");
 
-d3.csv("../data/audio.csv", function(data) {
+d3.csv("data/audio.csv", function(data) {
 
   var new_data = data.slice(0,10) ;
 

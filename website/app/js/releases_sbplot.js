@@ -12,7 +12,7 @@ var releases = d3.select("#busiest-month")
     .attr("transform",
           "translate(" + margin_releases.left + "," + margin_releases.top + ")");
 
-d3.csv("../data/busiest_month.csv", function(data) {
+d3.csv("data/busiest_month.csv", function(data) {
 
   var type = data.columns.slice(1);
   var month = d3.map(data, function(d){return(d.month)}).keys()
