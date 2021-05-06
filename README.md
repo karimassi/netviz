@@ -19,7 +19,8 @@
 
 **10% of the final grade**
 
-- [Report](milestones/milestone2.md) (best viusalized using Github's markdown preview)
+- [Report](milestones/milestone2.md) (best visualized using Github's markdown preview)
+- The website is available [here](https://com-480-data-visualization.github.io/data-visualization-project-2021-d3-musketeers/). Note: it is a work in progress, and the visualizations do not use real data and are not final.
 
 ## Milestone 3 (4th June, 5pm)
 
