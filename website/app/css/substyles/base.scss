@@ -1,5 +1,7 @@
 h1 {
   color: red;
+  font-size: 5em;
+  font-family: 'Bebas Neue', cursive;
   text-align: center;
 }
 
@@ -19,7 +21,7 @@ h2 {
       text-transform: uppercase;
       display: inline-block;
       position: relative;
-      border-bottom: 10px double white;
+      border-bottom: 10px double whitesmoke;
       padding-bottom: 5px;
       &::after {
         content: "ℵ";
@@ -37,7 +39,7 @@ h2 {
 }
 
 #fp-nav ul li a span {
-  background-color: white;
+  background-color: whitesmoke;
 }
 
 

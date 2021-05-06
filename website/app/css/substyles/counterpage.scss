@@ -1,15 +1,33 @@
 .animated-counter {
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-bottom: 0;
+  box-sizing: border-box;
   h4 {
-    text-align: center;
-    color: white;
+    display: inline-block;
+    // text-align: left;
+    color: whitesmoke;
+    position: relative;
+    &::after {
+      border-bottom: 2px solid whitesmoke;
+      content: '';
+      display: block;
+      position: absolute;
+      $width: 80px;
+      $half_width: $width / 2;
+      width: 100%;
+      left: 0;
+    }
   }
 
   .counter-data {
-    text-align: center;
+    text-align: left;
     span {
       color: red;
       font-weight: bold;
-      font-size: 3em;
+      font-size: 6.2em;
     }
   }
 }
