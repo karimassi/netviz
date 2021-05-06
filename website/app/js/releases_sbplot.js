@@ -14,7 +14,7 @@ $(function() {
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-  d3.csv("../data/busiest_month.csv", function(data) {
+  d3.csv("data/busiest_month.csv", function(data) {
 
     var type = data.columns.slice(1);
     var month = d3.map(data, function(d){return(d.month)}).keys()

@@ -13,7 +13,7 @@ $(function() {
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-  d3.csv("../data/audio.csv", function(data) {
+  d3.csv("data/audio.csv", function(data) {
 
     var new_data = data.slice(0,10) ;
 
