@@ -29,6 +29,7 @@ We will first display the evolution of the representation of languages in Netfli
 > The tools we will require for this visualization are `D3` and possibly `jQuery`.
 
 <br></br>
+<br></br>
 
 Naturally, what follows the languages are the countries. Netflix is available in more than 190 countries. But most items of its library are region-specific. Hence, we will use an interactive world map that will showcase the number of titles available in each country. A side-box to the right of the map will show general worldwide statistics (number of movies/series, top genres, etc). The user will be able to select a country which will highlight it on the map, and update the side-box with information specific to the selected country. 
 > For this interactive visualization, we will need `D3` (and perhaps `leaflet` or something lighter like `canvas`). The lectures on maps will come in handy for this part.
@@ -54,18 +55,20 @@ It would be interesting to find the most popular topics among movies and series,
 > For this visualization, we will need `D3` and the `d3-cloud` plugin. The lecture on text visualization will be useful here. 
 
 <br></br>
+<br></br>
 
 <img align="right" width="400" height="300" src="sketches/ages.jpg"></img>
 
 
-Netflix is a great source of entertainment for teenagers and younger children. However, content appropriate to their ages should be available in order not to upset their parents. Let's see if Netflix made sure this is the case. In this visualization, we will show the proportion of all content each age rating occupies at a given point in time. Using a bar plot (similar to an age-distribution pyramid plot), we will show this while making distinguishing movies from series. The plot will be animated over time. Under it, there will be a Netflix-style action bar, where the user can pause/play, restart and navigate through the animation. 
+Netflix is a great source of entertainment for teenagers and younger children and should therefore offer content appropriate to their ages. Let's see if Netflix made sure this is the case. In this visualization, we will show the proportion of all content each age rating occupies at a given point in time. Using a bar plot (similar to an age-distribution pyramid plot), we will show this with the movies on one side, and the series on the other. The plot will be animated over time. Under it, there will be a Netflix-style action bar, where the user can pause/play, restart and navigate through the animation. 
 > We will need `D3` for this visualization.
 
+<br></br>
 <br></br>
 
 <img align="left" width="400" height="300" src="sketches/genres.jpg"></img>
 
-Finally, we expect content to provide us with content that feeds our craving for spicy Dramas on Tuesday evenings, and our lust for comedies on week-end mornings. The content's genres could also be seasonal. Using a Sankey diagram, we will show the breakdown of content across months and genres. Sankey diagrams can quickly become cluttered. Therefore, when selecting a month, the visualization will highlight all flow outgoing from that month, into the corresponding genres. Similarly, when selecting a genre, the flow to all the corresponding months will be highlighted. Moreover, the plot will be animated, so that we can visualize differences in across years. 
+Finally, we expect Netflix to provide us with content that feeds our craving for spicy Dramas on Tuesday evenings, and our lust for comedies on week-end mornings. The content's genres could also be seasonal. Using a Sankey diagram, we will show the breakdown of content across months and genres. Those diagrams can quickly become cluttered. Therefore, when selecting a month, the visualization will highlight all flow outgoing from that month, into the corresponding genres. Similarly, when selecting a genre, the flow to all the corresponding months will be highlighted. Moreover, the plot will be animated, so that we can visualize differences across years. 
 > We will need `D3` and the `d3-sankey` plugin. The lectures on maps and graphs might come in handy in this case.
 
 <br></br>
@@ -74,7 +77,7 @@ Finally, we expect content to provide us with content that feeds our craving for
 
 After leading the user down our storyline, it's time to set her free, and let her explore the data in the way she likes. Using this tool, users can select a time period and a country, then have access to some visualizations and insights on the data for that time period and country. The tool will be formed of a map (similar to the previous one), and a selectable timeline (with an overlay showing the distribution of releases across time), around which various visualizations will be shown. 
 
-> This plot will require `D3`, and a map visualization tool. The lectures about maps will come in handy.
+> This plot will require `D3` and a map visualization tool. The lectures about maps will come in handy.
 
 <p align="center">
   <img height="700" src="sketches/explore.jpg"></img>
