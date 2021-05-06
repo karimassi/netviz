@@ -2,10 +2,16 @@
 
 Through our visualization, we would like to show how Netflix's release strategy evolved during the last few years. We will first introduce the dataset by showing basic insights about the content, and a first look at Netflix's release trends. In the past few years, Netflix expanded its operations to more and more countries. We'll next dive into the geographical and cultural expansion of the service, and how its library was updated accordingly. Such an expansion came with an adaptation of the content they offer, to adapt to their new cultural markets. We will finally look into the evolution of the content itself, in order to satisfy the growing demand.  
 
-> Generally throughout the project we will require the following lectures, that we will not mention under each visualization:
-> - The web development and D3 lectures to build the website and the core of our visualizations, along with the one about designing visualizations.
-> - The lecture on tabular data since it is the format our data is represented with. 
-> - The lecture on storytelling, since it is important to have a meaningful narrative which answers our problematic in a structured way. 
+## General comments
+
+Generally throughout the project we will require the following lectures, that we will not mention under each visualization:
+ - The web development and D3 lectures to build the website and the core of our visualizations, along with the one about designing visualizations.
+ - The lecture on tabular data since it is the format our data is represented with. 
+ - The lecture on storytelling, since it is important to have a meaningful narrative which answers our problematic in a structured way. 
+
+We will use `gulp` to streamline the website's development and deployment, along with `Babel` and `Sass`. We will also use `Bootstrap` as our main CSS framework, as it provides pre-built components and makes it easy to create responsive designs. To provide a smooth scrolling experience we will use `fullpage.js`. 
+
+Our core visualization consists of all the plots described below, aside from the ones containing maps and graphs. The latter are more complex, and we plan to include them only if time permits. If this is not the case, we can replace the maps by a simpler country selector. 
 
 ## Introduction
 
@@ -42,7 +48,7 @@ Naturally, what follows the languages are the countries. Netflix is available in
 
 <img align="right" width="400" height="300" src="sketches/network.jpg"></img>
 
-Finally, the addition of new content in new countries means the network of actors on the platform grew in size. Can we distinguish language communities by looking at such a network? In this part, we will show a graph where the nodes represent movies, and an edge links two movies if they share a common actor (the more actors they share, the higher the edge weight). Using community detection, we will display the graph in a way that movies are clustered depending on their original language. This graph will be animated as follows: at the start, the network whole is shown, but all the items are grayed-out. As time passes, movies released will lighten-up, and their respective connections too. At the end of the timeline, the whole graph will be visible. Under the visualization, there will be a Netflix-style action bar, where the user can pause/play, restart and navigate through the animation. 
+Finally, the addition of new content in new countries means the network of actors on the platform grew in size. Can we distinguish language communities by looking at such a network? In this part, we will show a graph where the nodes represent movies, and an edge links two movies if they share a common actor (the more actors they share, the higher the edge weight). Using community detection, we will display the graph in a way that movies are clustered depending on their original language. This graph will be animated as follows: at the start, the network whole is shown, but all the items are grayed-out. As time passes, movies released will lighten-up, and their respective connections too. At the end of the timeline, the whole graph will be visible. Under the visualization, there will be a Netflix-style action bar, where the user can pause/play, restart and navigate through the animation. We are still thinking about proper ways of choosing which nodes to include, to reduce the network's density.  
 > We will need `networkX` to build and analyse the graph, then `D3` and a graph visualization tool like `cytoscape` or `sigma`. The lecture about graphs will be needed for this part.
 
 ## Content evolution
