@@ -17,7 +17,7 @@ We are therefore interested in studying how Netflix's release strategy evolved d
 ## Dataset
 
 We first oriented our research on Kaggle but the available datasets did not meet our requirements. 
-Later on we stumbled upon an unofficial Netflix catalogue, [Flixwatch](www.flixwatch.co), from which we scrapped the content. 
+Later on we stumbled upon an unofficial Netflix catalogue, [Flixwatch](https://www.flixwatch.co), from which we scrapped the content. 
 In its FAQ page, the author specifies that the scrapping is allowed for non-commercial purposes. Our data contains the following attributes:
 - The title of the movie or the TV show;
 - A list of countries in which it is available;
