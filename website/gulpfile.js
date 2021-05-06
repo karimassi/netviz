@@ -98,6 +98,14 @@ function pushToGitPages() {
     }))
 }
 
+function pushToPublicGitPages() {
+  return src('./dist/**/*')
+    .pipe(ghPages({
+      remoteUrl: "https://github.com/com-480-data-visualization/data-visualization-project-2021-d3-musketeers",
+      branch: "gh-pages"
+    }))
+}
+
 function deploy() {
   return series(
     build(),
@@ -105,8 +113,17 @@ function deploy() {
   )
 }
 
+function deployPublic() {
+  return series(
+    build(),
+    pushToPublicGitPages
+  )
+}
+
 exports.build = build()
 exports.deploy = deploy()
+exports.deployPublic = deployPublic()
+
 exports.default = series(
   build(),
   parallel(watchFiles, syncBrowser)
