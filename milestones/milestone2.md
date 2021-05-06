@@ -1,6 +1,6 @@
 # Milestone 2
 
-Through our visualization, we would like to show how Netflix's release strategy evolved during the last few years. We will first introduce the dataset by showing basic insights about the content, and a first look at Netflix's release trends. In the past few years, Netflix expanded its operations to more and more countries. We'll next dive into the geographical and cultural expansion of the service, and how its library was updated accordingly. Such an expansion came with an adaptation of the content they offer, to adapt to their new cultural markets. We will finally look into the evolution of the content itself, in order to satisfy the growing demand.  
+Through our visualization, we would like to show how Netflix's release strategy evolved during the last few years. We will first introduce the dataset by showing basic insights about the content, and a first look at Netflix's release trends. We will next dive into the geographical and cultural expansion of the service, and how its library was updated accordingly. We will finally look into the evolution of the content itself, in order to satisfy the demand following the expansion.
 
 ## General comments
 
