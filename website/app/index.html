@@ -4,7 +4,7 @@
 
   <!-- Include stylesheets -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.css"/>
-  
+
   <link rel="stylesheet" href="css/master.css"/>
 </head>
 
@@ -21,9 +21,7 @@
             </div>
 
             <div class="section-body">
-              <div style="color: white; text-align: center">PLOT HERE</div>
-
-
+              <div style="color: white; text-align: center" id = "busiest-month"></div>
               <div class="row">
                 <div class="col-12 col-sm-6 col-vl-3">
                   <div class="animated-counter">
@@ -78,6 +76,8 @@
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous">
 </script>
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src = "js/bar_plot.js"></script>
 
 <script>
   $(document).ready(function () {

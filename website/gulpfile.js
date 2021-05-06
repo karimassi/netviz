@@ -14,7 +14,8 @@ const DEPENDENCIES = require('./dependencies.js')
 const files = {
   js: 'app/js/**/*.js',
   css: ['app/css/**/*.css', 'app/css/**/*.sass', 'app/css/**/*.scss'],
-  html: 'app/**/*.html'
+  html: 'app/**/*.html',
+  csv : 'app/**/*.csv'
 }
 
 function syncBrowser() {
@@ -51,10 +52,16 @@ function prepareHTML() {
     .pipe(dest('dist'))
 }
 
+function prepareCSV() {
+  return src(files.csv)
+    .pipe(dest('dist'))
+}
+
 function watchFiles() {
   watch(files.js, prepareJs)
   watch(files.css, prepareCss)
   watch(files.html, prepareHTML)
+  watch(files.csv, prepareCSV)
 }
 
 NODE_MODULES_DIR = 'node_modules'
@@ -73,7 +80,7 @@ function includeCssDependencies() {
 function build() {
   return series(
     // parallel(includeJsDependencies, includeCssDependencies),
-    parallel(prepareJs, prepareCss, prepareHTML)
+    parallel(prepareJs, prepareCss, prepareHTML, prepareCSV)
   )
 }
 
