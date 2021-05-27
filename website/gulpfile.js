@@ -15,7 +15,8 @@ const files = {
   js: 'app/js/**/*.js',
   css: ['app/css/**/*.css', 'app/css/**/*.sass', 'app/css/**/*.scss'],
   html: 'app/**/*.html',
-  csv : 'app/**/*.csv'
+  data: ['app/**/*.csv', 'app/**/*.json'], 
+  images: ['app/**/*.png', 'app/**/*.jpg'] 
 }
 
 function syncBrowser() {
@@ -52,8 +53,13 @@ function prepareHTML() {
     .pipe(dest('dist'))
 }
 
-function prepareCSV() {
-  return src(files.csv)
+function prepareData() {
+  return src(files.data)
+    .pipe(dest('dist'))
+}
+
+function prepareImages() {
+  return src(files.images)
     .pipe(dest('dist'))
 }
 
@@ -61,7 +67,8 @@ function watchFiles() {
   watch(files.js, prepareJs)
   watch(files.css, prepareCss)
   watch(files.html, prepareHTML)
-  watch(files.csv, prepareCSV)
+  watch(files.data, prepareData)
+  watch(files.images, prepareImages)
 }
 
 NODE_MODULES_DIR = 'node_modules'
@@ -80,13 +87,21 @@ function includeCssDependencies() {
 function build() {
   return series(
     // parallel(includeJsDependencies, includeCssDependencies),
-    parallel(prepareJs, prepareCss, prepareHTML, prepareCSV)
+    parallel(prepareJs, prepareCss, prepareHTML, prepareData, prepareImages)
   )
 }
 
 function pushToGitPages() {
   return src('./dist/**/*')
     .pipe(ghPages({
+      branch: "gh-pages"
+    }))
+}
+
+function pushToPublicGitPages() {
+  return src('./dist/**/*')
+    .pipe(ghPages({
+      remoteUrl: "https://github.com/com-480-data-visualization/data-visualization-project-2021-d3-musketeers",
       branch: "gh-pages"
     }))
 }
@@ -98,8 +113,17 @@ function deploy() {
   )
 }
 
+function deployPublic() {
+  return series(
+    build(),
+    pushToPublicGitPages
+  )
+}
+
 exports.build = build()
 exports.deploy = deploy()
+exports.deployPublic = deployPublic()
+
 exports.default = series(
   build(),
   parallel(watchFiles, syncBrowser)

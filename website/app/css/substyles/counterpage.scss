@@ -5,13 +5,13 @@
   padding-left: 10px;
   padding-bottom: 0;
   box-sizing: border-box;
+  
   h4 {
     display: inline-block;
     // text-align: left;
     color: whitesmoke;
     position: relative;
     &::after {
-      border-bottom: 2px solid whitesmoke;
       content: '';
       display: block;
       position: absolute;
