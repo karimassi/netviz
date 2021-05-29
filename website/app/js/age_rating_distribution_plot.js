@@ -1,8 +1,3 @@
-const zip = (arr, ...arrs) => {
-  return arr.map((val, i) => arrs.reduce((a, arr) => [...a, arr[i]], [val]));
-}
-
-
 class AgeRatingDistributionPlot {
   constructor(svgElement) {
     this.svg = svgElement;
@@ -12,6 +7,9 @@ class AgeRatingDistributionPlot {
     this.setup();
   }
 
+  /**
+   * Creates texts in corners (Movies/TV Shows)
+   */
   createInfoTexts(width, xSideGap) {
     this.svg.append('text')
       .attr('x', xSideGap)
@@ -30,6 +28,9 @@ class AgeRatingDistributionPlot {
       .text('TV Shows');
   }
 
+  /**
+   * Creates X axis and sets its ticks
+   */
   createXAxis(width, height, tickPositionValuePairsOneSided) {
     const axis = this.svg.append('g')
       .attr('width', width)
@@ -70,10 +71,17 @@ class AgeRatingDistributionPlot {
       .text(tick => tick.value + '%');
   }
 
+  /**
+   * Returns the size of bar depending on percentage
+   */
   barWidth(percentage) {
     return percentage * this.maxBarWidth;
   }
 
+  /**
+   * Creates text values on Y axis in the middle of the plot, as well as
+   *  corresponding bars for each
+   */
   createYAxisAndBars(width, height, yAxisWidth) {
     const middle_bar = this.svg.append('g')
       .attr('width', yAxisWidth)
@@ -127,6 +135,9 @@ class AgeRatingDistributionPlot {
     });
   }
 
+  /**
+   * Creates the box that appears when a bar is hovered
+   */
   createTooltip() {
     const tooltipGroup = this.svg.append('g')
       .attr('id', 'age-rating-distribution-tooltip')
@@ -146,6 +157,9 @@ class AgeRatingDistributionPlot {
       .text('');
   }
 
+  /**
+   * Creates GUI and sets the initial state of the plot
+   */
   setup() {
     const main_color = 'whitesmoke';
     let [sizeX, sizeY] = [800, 530];
@@ -167,7 +181,10 @@ class AgeRatingDistributionPlot {
     this.createTooltip();
   }
 
-
+  /**
+   * Updates size of elements depending on the received data and
+   *  changes event functions of the tooltip to match the new data
+   */
   updateData(data) {
     this.currentData = data;
     const distanceFromMiddle = this.yAxisWidth / 2;
@@ -291,7 +308,6 @@ $(() => {
   );
 
 
-
   // let i = 0;
   // const iterval = setInterval(() => {
   //   console.log(1);
@@ -320,7 +336,5 @@ $(() => {
   //   'date',
   //   dateFormatter);
 
-  $("#btn11").click(() => {
-    selector.increasePercentage();
-  })
+
 });
