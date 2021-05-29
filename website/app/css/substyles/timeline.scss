@@ -14,8 +14,6 @@
         content: '';
         display: block;
         position: absolute;
-        $width: 80px;
-        $half_width: $width / 2;
         width: 100%;
         left: 0;
         }
@@ -23,7 +21,6 @@
 
     .btn.btn-default{
         outline:none;
-        box-shadow:none 
+        box-shadow:none
     }
-
 }

@@ -1,0 +1,19 @@
+.time-selector {
+  background-color: #1f1f2e;
+  border-radius: 4px;
+  div {
+    // background-color: green;
+  }
+  .play-control {
+    min-height:60px;
+    // background: blue;
+    color: whitesmoke;
+    font-size: 3em;
+  }
+
+  .plot-description {
+    text-align: left;
+    font-size: 1.3em;
+    color: whitesmoke;
+  }
+}

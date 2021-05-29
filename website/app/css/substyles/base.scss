@@ -30,6 +30,7 @@ h2 {
       border-bottom: 10px double whitesmoke;
       padding-bottom: 5px;
       &::after {
+        font-family: 'Glyphicons Halflings';
         content: "ℵ";
         color: whitesmoke;
         background-color: #000000;
