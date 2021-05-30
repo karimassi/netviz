@@ -8,6 +8,8 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+ <!-- Latest compiled and minified CSS -->
+ 
 
     <link rel="stylesheet" href="css/master.css"/>
   </head>
@@ -89,10 +91,12 @@
               <div class="container pt-5">
                 <div class="row align-items-start">
                   <div class="col-9">
-                    <div id = "world-map"></div>
+                    <div class="map">
+                      <svg id = "world-map"></svg>
+                    </div>
                   </div>
-                  <div class="col">
-                    <div class="side-box">
+                  <div class="col side-box">
+                    <div id="country-passport" class="country-passport">
                       <h4>Select a country to get started!</h4>
                       <p>This map shows the number of releases per country. Click on a country to get more insight.</p>
                     </div>
@@ -282,7 +286,11 @@
 <!-- Include libraries from CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js" integrity="sha512-FzESM/E7XJBqcJyrXa08gRcpp5rDHO661C0L3vH4NsZfUWUsjN4+t6Lg8h+e8TMR2aYijIrcT+CPGq7tSugRzA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js" 
+        integrity="sha512-FzESM/E7XJBqcJyrXa08gRcpp5rDHO661C0L3vH4NsZfUWUsjN4+t6Lg8h+e8TMR2aYijIrcT+CPGq7tSugRzA==" 
+        crossorigin="anonymous"
+         referrerpolicy="no-referrer">
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous">
