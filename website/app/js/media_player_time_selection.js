@@ -17,6 +17,7 @@ class TimeSelector {
    */
   constructor(id, interval, onPercentageSelectedCallback, traverseTime, scalingType, dateFormatter) {
     this.baseEl = d3.select(`#${id}`);
+    this.id = id;
     this.dragging = false;
     this.interval = interval;
     this.onPercentageSelectedCallback = onPercentageSelectedCallback;
@@ -174,6 +175,33 @@ class TimeSelector {
   }
 
   /**
+   * Starts dragging mode
+   */
+  handleDragStart() {
+    this.dragging = true;
+  }
+
+  /**
+   * Sets visuals and emits data when dragging is over, also ends dragging mode
+   */
+  handleDragOver() {
+    if(this.dragging) {
+      this.dragging = false;
+      this.emitPercentage(this.getMousePercentage());
+      this.setPercentage(this.getMousePercentage());
+    }
+  }
+
+  /**
+   * Does visual update if possible during dragging of the slider
+   */
+  handleDragMove() {
+    if(this.dragging) {
+      this.setVisualPercentage(this.getMousePercentage());
+    }
+  }
+
+  /**
    * Creates GUI elements and setups initial state
    */
   createGUI() {
@@ -218,9 +246,7 @@ class TimeSelector {
       .attr('height', BAR_HEIGHT)
       .attr('width', BAR_WIDTH)
       .attr('fill', 'rgba(255, 255, 255, .5)')
-      .on('mousedown', () => {
-        this.dragging = true;
-      });
+      .on('mousedown', () => this.handleDragStart());
 
     this.plotBar = barGroup.append('rect')
       .attr('x', 0)
@@ -228,9 +254,7 @@ class TimeSelector {
       .attr('height', BAR_HEIGHT)
       .attr('width', 0)
       .attr('fill', 'red')
-      .on('mousedown', () => {
-        this.dragging = true;
-      });
+      .on('mousedown', () => this.handleDragStart());
 
     this.plotHandle = barGroup.append('circle')
       .attr('cx', 0)
@@ -238,30 +262,11 @@ class TimeSelector {
       .attr('r', 9)
       .attr('fill', 'red')
       .style('cursor', 'pointer')
-      .on('mousedown', () => {
-        this.dragging = true;
-      });
+      .on('mousedown', () => this.handleDragStart());
 
-    barSvg
-      .on('mouseup', () => {
-        if(this.dragging) {
-          this.dragging = false;
-          this.emitPercentage(this.getMousePercentage());
-          this.setPercentage(this.getMousePercentage());
-        }
-      })
-      .on('mousemove', () => {
-        if(this.dragging) {
-          this.setVisualPercentage(this.getMousePercentage());
-        }
-      })
-      .on('mouseleave', () => {
-        if(this.dragging) {
-          this.dragging = false;
-          this.emitPercentage(this.getMousePercentage());
-          this.setPercentage(this.getMousePercentage());
-        }
-      });
+    d3.select('body')
+      .on(`mouseup.${this.id}`, () => this.handleDragOver())
+      .on(`mousemove.${this.id}`, () => this.handleDragMove());
 
     this.selectionText = barGroup.append('text')
       .attr('x', 2)
@@ -271,7 +276,6 @@ class TimeSelector {
       .style('alignment-baseline', 'hanging')
       .style('text-anchor', 'start')
       .text(this.createText(this.interval[0]));
-
 
     const plotDesc = this.baseEl.attr('plot-description');
     if(plotDesc !== undefined) {
