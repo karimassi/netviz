@@ -1,30 +1,48 @@
 $(function() {
-    // append the svg object to the body of the page
-    var width = 1000
-    var height = 400
+  let svg = d3.select('svg#world-map')
+  d3.json("data/countries_info.json").then(data => {
+    draw_map(svg, (name => {
+      updateCountryPassport(name, data)
+    }))
+  });
+})
 
-    var svg = d3.select("#world-map")
-    .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-    .append("g")
+function updateCountryPassport(name, info) {
+  $( "#country-passport" ).find("h4").text(name)
+  if (typeof info[name] == 'undefined') {
+      $("#country-passport").find("p").text("No information available for that country...")
+  } else {
+      $("#country-passport").find("p").html(`There are ${info[name].count_movies} movies and ${info[name].count_series} series available in this country.<br><br>The top 10 genres are ${info[name].genres.join(', ')}.`)
+  }
+}
 
-    // Map and projection
-    var path = d3.geoPath();
-    var projection = d3.geoMercator()
-    .scale(100)
-    .center([0,0])
-    .translate([width / 2, height / 2 + 80]);
+function draw_map(svg, callback) {
+  
+  let [width, height] = [800, 450]
+  svg.attr('viewBox', `0, 0, ${width}, ${height}`)
 
-    // Data and color scale
-    var data = d3.map();
+  var projection = d3.geoPatterson().translate([width/2, height/2]);
 
-    // Load external data and boot
-    d3.queue()
-    .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
-    .await(ready);
+  d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+    .then(topo => {
+      ready(topo)
+    });
 
-    function ready(error, topo) {
+  function ready(topo) {
+    let mouseClick = function(d) {
+        d3.selectAll(".Country")
+          .transition()
+          .duration(200)
+          .style("fill", "grey")
+          .style("stroke", "transparent")
+        d3.select(this)
+          .transition()
+          .duration(200)
+          .style("opacity", 1)
+          .style("fill", "red")
+          .style("stroke", "black")
+        callback(d.properties.name)
+      }
 
     // Draw the map
     svg.append("g")
@@ -36,8 +54,11 @@ $(function() {
         .attr("d", d3.geoPath()
             .projection(projection)
         )
+        .attr("class", function(d){ return "Country" } )
         // set the color of each country
         .attr("fill", "white")
-        }
-})
-
+        .style("stroke", "transparent")
+        .on("click", mouseClick)
+}
+  
+}
