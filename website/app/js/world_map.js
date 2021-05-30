@@ -1,12 +1,10 @@
 $(function() {
   let svg = d3.select('svg#world-map')
-  d3.queue()
-  .defer(d3.json, "data/countries_info.json")
-  .await((error, data) => {
+  d3.json("data/countries_info.json").then(data => {
     draw_map(svg, (name => {
       updateCountryPassport(name, data)
     }))
-  } );
+  });
 })
 
 function updateCountryPassport(name, info) {
@@ -25,11 +23,12 @@ function draw_map(svg, callback) {
 
   var projection = d3.geoPatterson().translate([width/2, height/2]);
 
-  d3.queue()
-    .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
-    .await(ready);
+  d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+    .then(topo => {
+      ready(topo)
+    });
 
-  function ready(error, topo, info) {
+  function ready(topo) {
     let mouseClick = function(d) {
         d3.selectAll(".Country")
           .transition()
