@@ -279,19 +279,20 @@ $(() => {
     plot.updateData(stats_for_year[2015]);
   }
 
-  d3.csv('data/age_rating_per_year_distribution.csv', data => {
-    data.forEach(dataPoint => {
-      if(stats_for_year[dataPoint.year] === undefined) {
-        stats_for_year[dataPoint.year] = {};
-      }
-      if(stats_for_year[dataPoint.year][dataPoint['age rating']] === undefined) {
-        stats_for_year[dataPoint.year][dataPoint['age rating']] = {};
-      }
-      stats_for_year[dataPoint.year][dataPoint['age rating']][dataPoint.category] = parseFloat(dataPoint.percentage)
-    });
+  d3.csv('data/age_rating_per_year_distribution.csv')
+    .then(data => {
+      data.forEach(dataPoint => {
+        if(stats_for_year[dataPoint.year] === undefined) {
+          stats_for_year[dataPoint.year] = {};
+        }
+        if(stats_for_year[dataPoint.year][dataPoint['age rating']] === undefined) {
+          stats_for_year[dataPoint.year][dataPoint['age rating']] = {};
+        }
+        stats_for_year[dataPoint.year][dataPoint['age rating']][dataPoint.category] = parseFloat(dataPoint.percentage)
+      });
 
-    showInitialPlot();
-  });
+      showInitialPlot();
+    });
 
   $('#content-button').click(() => {
     const year = parseInt($('#content-year-option').val());

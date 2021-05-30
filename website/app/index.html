@@ -189,7 +189,7 @@
           </div>
         </div>
         <!-- GENRES -->
-         <div class="section">
+         <!-- <div class="section">
           <div class="container">
             <div class="section-heading">
               <h2>For any mood at any time</h2>
@@ -199,7 +199,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </div>
               <svg id = "mood" height = "500px" width = "100%"></svg>
-              <br></br>
+              <br></br> -->
               <!--<img src="img/sankey.jpg" width="50%"></img>
               <br></br>
               <div class="row timeline">
@@ -305,15 +305,15 @@
       sectionsColor: pages.map(function() {
         return '#000000';
       }),
-      afterSlideLoad : function(section, origin, destination, direction) {
-        if (section.index == 1) {
+      afterLoad : function(origin, destination, direction) {
+        if (destination == 2) {
           let svg = d3.select('svg#busiest-month') ;
           svg.attr('visibility', 'visible');
-          console.log('hello');
+          // console.log('hello');
           //$('svg#busiest-month').animate({'visibility' : visible}, 5000) ;
           let data_path = "data/busiest_month.csv";
-          instentiateBusiestMonth(svg, pata_path) ;
-        } 
+          instentiateBusiestMonth(svg, data_path) ;
+        }
       }
     });
   });

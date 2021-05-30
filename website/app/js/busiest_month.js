@@ -43,7 +43,7 @@ class BusiestMonthStackedBarPlot {
           .style('fill', 'whitesmoke')
           .style('font-size', '0.7rem');
     }
-    
+
     createColorRange() {
         return d3.scaleOrdinal()
                 .domain(['Movies', 'Shows'])
@@ -70,8 +70,9 @@ class BusiestMonthStackedBarPlot {
         var x = this.xScale(width);
         var y = this.yScale(height);
         var color = this.createColorRange();
-        
+
         this.svg.append("g")
+        .attr('id', 'target123')
         .selectAll("g")
         // Enter in the stack data = loop key per key = group per group
         .data(this.MONTHS)
@@ -98,7 +99,7 @@ class BusiestMonthStackedBarPlot {
 
     updateData(data) {
 
-        this.currentData = data ;
+        this.currentData = data;
 
         this.currentData.forEach(d=> d.total = parseInt(d.movie)+parseInt(d.show));
 
@@ -124,7 +125,7 @@ class BusiestMonthStackedBarPlot {
             tooltip
             .style("left", (x + 10) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
             .style("top", y + "px")
-        } 
+        }
         var mouseleave = function(d) {
             tooltip.style("opacity", 0)
         }
@@ -140,8 +141,8 @@ class BusiestMonthStackedBarPlot {
             })
             .transition(transition)
             .attr("y", function(d) { return y(d[1]); })
-            .attr("height", function(d) { 
-                return y(d[0]) - y(d[1]); 
+            .attr("height", function(d) {
+                return y(d[0]) - y(d[1]);
             })
             //.delay(function(d,i) {return i*100})
             .on("mouseover", mouseover)
@@ -153,7 +154,7 @@ class BusiestMonthStackedBarPlot {
 
 function instentiateBusiestMonth(svg,data_path) {
 
-    let data = {};
+    let loadedData = {};
 
     let plot = new BusiestMonthStackedBarPlot(svg);
 
@@ -165,12 +166,14 @@ function instentiateBusiestMonth(svg,data_path) {
             .style('opacity', 1);
     }
 
-    d3.csv(data_path).then(function(data) {
-        data = data;
-        data.forEach(d=> d.total = parseInt(d.movie)+parseInt(d.show));
+    d3.csv(data_path).then(data => {
+        loadedData = data;
+        console.log(data);
+        loadedData.forEach(d=> d.total = parseInt(d.movie)+parseInt(d.show));
+
+
+        showInitialPlot();
+
+        plot.updateData(loadedData);
     });
-
-    showInitialPlot();
-
-    plot.updateData(data);
 }

@@ -243,7 +243,7 @@ class RangeSelector {
 }
 
 $(() => {
-  d3.csv('data/release_density_per_month.csv', data => {
+  d3.csv('data/release_density_per_month.csv').then(data => {
     const points = [];
 
     for(let i = 0; i < data.length; i++) {
