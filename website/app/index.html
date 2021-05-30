@@ -317,8 +317,6 @@
         if (destination == 2) {
           let svg = d3.select('svg#busiest-month') ;
           svg.attr('visibility', 'visible');
-          // console.log('hello');
-          //$('svg#busiest-month').animate({'visibility' : visible}, 5000) ;
           let data_path = "data/busiest_month.csv";
           instentiateBusiestMonth(svg, data_path) ;
         }

@@ -1,24 +1,25 @@
 class BusiestMonthStackedBarPlot {
     constructor(svgElement) {
         this.svg = svgElement;
-        this.bars = {};
         this.currentData = {};
-        this.MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        this.MONTHS = {};
+        this.width = 0;
+        this.height = 0;
         this.setup();
     }
 
-    xScale(width) {
+    xScale() {
         return d3.scaleBand()
         .domain(this.MONTHS)
-        .range([ 0, width ])
+        .range([ 0, this.width ])
         .padding(0.4);
     }
 
-    createXaxis(width, height) {
-        var x = this.xScale(width) ;
+    createXaxis() {
+        var x = this.xScale(this.width) ;
 
         this.svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + this.height + ")")
         .call(d3.axisBottom(x))
         .selectAll("text")
             .attr("transform", "translate(-10,0)rotate(-45)")
@@ -27,17 +28,17 @@ class BusiestMonthStackedBarPlot {
             .style('font-size', '1rem');
     }
 
-    yScale(height) {
+    yScale() {
         return d3.scaleLinear()
         .domain([0,2000])
-        .range([ height, 0]);
+        .range([ this.height, 0]);
     }
 
-    createYaxis(width, height) {
-        var y = this.yScale(height);
+    createYaxis() {
+        var y = this.yScale(this.height);
 
         this.svg.append("g")
-        .attr("transform", "translate(0," + width + ")")
+        .attr("transform", "translate(0," + this.width + ")")
         .call(d3.axisLeft(y))
         .selectAll("text")
           .style('fill', 'whitesmoke')
@@ -66,19 +67,17 @@ class BusiestMonthStackedBarPlot {
         .style("padding", "10px")
     }
 
-    initiateBars(width, height) {
-        var x = this.xScale(width);
-        var y = this.yScale(height);
+    initiateBars() {
+        var x = this.xScale(this.width);
+        var y = this.yScale(this.height);
         var color = this.createColorRange();
 
         this.svg.append("g")
-        .attr('id', 'target123')
         .selectAll("g")
         // Enter in the stack data = loop key per key = group per group
         .data(this.MONTHS)
         .enter().append("g")
             .attr("fill", '#ffffff')
-            .selectAll("rect")
             .attr("x", function(d) { return x(d); })
             .attr("y", function(d) { return y(0); })
             .attr("height", function(d) { return y(0); })
@@ -86,31 +85,33 @@ class BusiestMonthStackedBarPlot {
     }
 
     setup() {
-        let [sizeX, sizeY] = [1350, 380];
-        this.svg.attr('viewBox', `0 0 ${sizeX} ${sizeY}`);
+        this.width = 1350 ;
+        this.height = 380;
+        this.svg.attr('viewBox', `0 0 ${this.width} ${this.height}`);
 
-        this.createXaxis(sizeX, sizeY);
-        this.createYaxis(sizeX, sizeY);
+        this.createXaxis(this.width, this.height);
+        this.createYaxis(this.width, this.height);
 
-        this.initiateBars(sizeX, sizeY) ;
+        this.initiateBars(this.width, this.height) ;
 
         this.createTooltips();
     }
 
-    updateData(data) {
+    updateData() {
 
-        this.currentData = data;
-
-        this.currentData.forEach(d=> d.total = parseInt(d.movie)+parseInt(d.show));
-
+        //this.currentData.forEach(d=> d.total = parseInt(d.movie)+parseInt(d.show));
         var stackedData = this.createStackedData();
         var types = this.currentData.columns.slice(1);
         var color = this.createColorRange();
 
-        var transition = d3.transition(d3.easeCubicOut).duration(10000);
+        var transition = d3.transition().duration(2000);
+
+        var x = this.xScale(this.width); 
+        var y = this.yScale(this.height);
+
+        var tooltip = d3.select('div#busiest-month');
 
         //setup tooltip
-
         var mouseover = function(d) {
             var subgroupName = d3.select(this.parentNode).datum().key;
             var subgroupValue = d.data[subgroupName];
@@ -129,25 +130,29 @@ class BusiestMonthStackedBarPlot {
         var mouseleave = function(d) {
             tooltip.style("opacity", 0)
         }
-        //console.log(stackedData);
-        //update data
-        this.svg.selectAll('rect')
-            .data(stackedData)
-            .enter().append('g')
-            .attr("fill", function(d) { return color(d.key);})
-            .selectAll('rect')
-            .data(function(d) {
-                return d;
-            })
-            .transition(transition)
-            .attr("y", function(d) { return y(d[1]); })
-            .attr("height", function(d) {
-                return y(d[0]) - y(d[1]);
-            })
-            //.delay(function(d,i) {return i*100})
+
+
+        this.svg.append("g")
+        .selectAll("g")
+        // Enter in the stack data = loop key per key = group per group
+        .data(stackedData)
+        .enter().append("g")
+            .attr("fill", function(d) { return color(d.key); })
+            .selectAll("rect")
+            // enter a second time = loop subgroup per subgroup to add all rectangles
+            .data(function(d) { return d; })
+            .enter().append("rect")
+            .attr("x", function(d) { return x(d.data.month); })
+            .attr("y", function(d) { return 0; })
+            .attr("height", function(d) { return y(0); })
+            .attr("width",x.bandwidth())
             .on("mouseover", mouseover)
             .on("mousemove", mousemove)
             .on("mouseleave", mouseleave)
+            .transition(transition)
+            .attr("y", function(d) { return y(d[1]); })
+            .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+            .delay(function(d,i) {return i*200})
     }
     }
 
@@ -168,12 +173,12 @@ function instentiateBusiestMonth(svg,data_path) {
 
     d3.csv(data_path).then(data => {
         loadedData = data;
-        console.log(data);
         loadedData.forEach(d=> d.total = parseInt(d.movie)+parseInt(d.show));
-
-
+        
         showInitialPlot();
+        plot.currentData = loadedData;
+        plot.MONTHS = d3.map(loadedData, function(d){return(d.month)}).keys();
 
-        plot.updateData(loadedData);
+        plot.updateData();
     });
 }
