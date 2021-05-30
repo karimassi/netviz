@@ -1,7 +1,7 @@
 $(function() {
-  let svg = d3.select('svg#world-map')
+  const map =  new WorldMapPlot("#world-map");
   d3.json("data/countries_info.json").then(data => {
-    draw_map(svg, (name => {
+    map.draw((name => {
       updateCountryPassport(name, data)
     }))
   });
@@ -16,49 +16,44 @@ function updateCountryPassport(name, info) {
   }
 }
 
-function draw_map(svg, callback) {
-  
-  let [width, height] = [800, 450]
-  svg.attr('viewBox', `0, 0, ${width}, ${height}`)
+class WorldMapPlot {
+  constructor(id) {
+    this.id = id
+  }
 
-  var projection = d3.geoPatterson().translate([width/2, height/2]);
-
-  d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
-    .then(topo => {
-      ready(topo)
-    });
-
-  function ready(topo) {
-    let mouseClick = function(d) {
-        d3.selectAll(".Country")
-          .transition()
-          .duration(200)
-          .style("fill", "grey")
-          .style("stroke", "transparent")
-        d3.select(this)
-          .transition()
-          .duration(200)
-          .style("opacity", 1)
-          .style("fill", "red")
-          .style("stroke", "black")
-        callback(d.properties.name)
-      }
-
-    // Draw the map
-    svg.append("g")
-        .selectAll("path")
-        .data(topo.features)
-        .enter()
-        .append("path")
-        // draw each country
-        .attr("d", d3.geoPath()
-            .projection(projection)
-        )
-        .attr("class", function(d){ return "Country" } )
-        // set the color of each country
-        .attr("fill", "white")
-        .style("stroke", "transparent")
-        .on("click", mouseClick)
-}
-  
+  draw(callback) {
+    $(this.id).vectorMap({
+      map: 'world_mill',
+      // zoomOnScroll: true, 
+      // panOnDrag: true, 
+      hoverColor: false,
+      backgroundColor: '#000',
+      regionsSelectable: true,
+      regionsSelectableOne: true,
+      regionStyle: {
+        initial: {
+          fill: 'gray',
+          "fill-opacity": 1,
+        },
+        hover: {
+          "fill-opacity": 0.8,
+        },
+        selected: {
+          fill: 'red'
+        },
+        selectedHover: {
+          "fill-opacity": 1,
+        }
+      },
+      zoomMax: 8, 
+      zoomMin: 1, 
+      zoomStep: 1.6,
+      onRegionSelected: ((event, code, isSelected) => {
+        if (isSelected) {
+          let map=$('#world-map').vectorMap('get', 'mapObject');
+          callback(map.getRegionName(code))
+        }
+      })
+    });  
+  }
 }
