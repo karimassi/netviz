@@ -109,6 +109,9 @@ class BusiestMonthStackedBarPlot {
         var x = this.xScale(this.width); 
         var y = this.yScale(this.height);
 
+        this.createXaxis(this.width, this.height);
+        this.createYaxis(this.width, this.height);
+
         var tooltip = d3.select('div#busiest-month');
 
         //setup tooltip

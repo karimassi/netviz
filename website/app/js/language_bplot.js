@@ -1,5 +1,35 @@
 //  code adapted from : https://bl.ocks.org/jrzief/70f1f8a5d066a286da3a1e699823470f
 
+class RacingBarsAudio {
+  constructor(svgElement) {
+    this.svg = svgElement;
+    this.currentData = {}
+    this.width = 0;
+    this.height = 0;
+    this.setup()
+  }
+
+  xScale() {
+
+  }
+
+  createXaxis() {
+
+  }
+
+  yScale() {
+
+  }
+
+  createYaxis() {
+
+  }
+
+
+}
+
+
+
 $(() => {
   let svg = d3.select('svg#most-languages') ;
   let data = 'data/racing_audio.csv';
@@ -19,7 +49,6 @@ function createRacingLanguageBars(svg, data) {
   var tickDuration = 200;
 
   var svg = svg.append('g')
-      .attr("width", sizeX)
       .attr("height", `translate(0, ${sizeY - 50})`);
 
   let barPadding = (sizeY-(margin.bottom+margin.top))/(top_n*5);
