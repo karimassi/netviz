@@ -298,6 +298,8 @@
       "Age",
       "Genres"
     ];
+    var intro_loaded = false;
+    var languages_loaded = false;
 
     $("#fullpage").fullpage({
       navigation: true,
@@ -314,11 +316,19 @@
         return '#000000';
       }),
       afterLoad : function(origin, destination, direction) {
-        if (destination == 2) {
+        if ((destination == 2) && !(intro_loaded)) {
+          intro_loaded = true;
           let svg = d3.select('svg#busiest-month') ;
           svg.attr('visibility', 'visible');
           let data_path = "data/busiest_month.csv";
           instentiateBusiestMonth(svg, data_path) ;
+        }
+        if ((destination == 3) && !(languages_loaded)) {
+          languages_loaded = true;
+          let svg = d3.select('svg#most-languages') ;
+          svg.attr('visibility', 'visible');
+          let data_path = "data/racing_audio.csv";
+          instantiateRacingBars(svg, data_path) ;
         }
       }
     });
