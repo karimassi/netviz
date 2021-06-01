@@ -38,8 +38,8 @@ class BusiestMonthStackedBarPlot {
         var y = this.yScale(this.height);
 
         this.svg.append("g")
-        .attr("transform", "translate(0," + this.width + ")")
-        .call(d3.axisLeft(y))
+        .attr("transform", "translate(40,0)")
+        .call(d3.axisLeft(y).ticks(5))
         .selectAll("text")
           .style('fill', 'whitesmoke')
           .style('font-size', '0.7rem');
@@ -68,8 +68,8 @@ class BusiestMonthStackedBarPlot {
     }
 
     initiateBars() {
-        var x = this.xScale(this.width);
-        var y = this.yScale(this.height);
+        var x = this.xScale();
+        var y = this.yScale();
         var color = this.createColorRange();
 
         this.svg.append("g")
@@ -89,10 +89,10 @@ class BusiestMonthStackedBarPlot {
         this.height = 380;
         this.svg.attr('viewBox', `0 0 ${this.width} ${this.height}`);
 
-        this.createXaxis(this.width, this.height);
-        this.createYaxis(this.width, this.height);
+        this.createXaxis();
+        this.createYaxis();
 
-        this.initiateBars(this.width, this.height) ;
+        this.initiateBars() ;
 
         this.createTooltips();
     }
@@ -106,8 +106,11 @@ class BusiestMonthStackedBarPlot {
 
         var transition = d3.transition().duration(2000);
 
-        var x = this.xScale(this.width); 
-        var y = this.yScale(this.height);
+        var x = this.xScale(); 
+        var y = this.yScale();
+
+        this.createXaxis();
+        this.createYaxis();
 
         var tooltip = d3.select('div#busiest-month');
 
@@ -143,7 +146,7 @@ class BusiestMonthStackedBarPlot {
             .data(function(d) { return d; })
             .enter().append("rect")
             .attr("x", function(d) { return x(d.data.month); })
-            .attr("y", function(d) { return 0; })
+            .attr("y", function(d) { return y(this.height); })
             .attr("height", function(d) { return y(0); })
             .attr("width",x.bandwidth())
             .on("mouseover", mouseover)
