@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<title>Netviz</title>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -191,7 +192,7 @@
           </div>
         </div>
         <!-- GENRES -->
-         <!-- <div class="section">
+         <div class="section">
           <div class="container">
             <div class="section-heading">
               <h2>For any mood at any time</h2>
@@ -200,37 +201,8 @@
               <div class="justified-text" style="max-width: 700px; margin: 10px auto;">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </div>
-              <svg id = "mood" height = "500px" width = "100%"></svg>
-              <br></br> -->
-              <!--<img src="img/sankey.jpg" width="50%"></img>
+              <svg id = "mood" height = "900px" width = "100%"></svg>
               <br></br>
-              <div class="row timeline">
-                <div class="col-1 rp-0 text-center">
-                  <button class="btn btn-default" id="btn-animation-genres-play">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="90%" fill="white" class="bi bi-play-circle" viewBox="0 0 16 16">
-                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                      <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
-                    </svg>
-                  </button>
-                  <button class="btn btn-default" id="btn-animation-genres-pause">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="90%" fill="white" class="bi bi-pause-circle" viewBox="0 0 16 16">
-                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                      <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>
-                    </svg>
-                  </button>
-
-                </div>
-                <div class="col-1 rp-0 text-center rm-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="60%" fill="white" class="bi bi-info-circle" viewBox="0 0 16 16">
-                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                  </svg>
-                </div>
-                <div class="col-1 text-center">
-                  Breakdown of content across months and genres.
-                </div>
-              </div>
-            </div>
-          </div> -->
 
           <div class="section" id="content-for-everybody-page">
             <div class="container">
@@ -268,7 +240,8 @@
 <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-
+<!-- <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/sankey.js"></script>
+ -->
 <script src="js/jquery-jvectormap-2.0.5.min.js"></script>
 <script src="js/jquery-jvectormap-world-mill.js"></script>
 
@@ -283,6 +256,7 @@
 <script src = "js/button_handler.js"></script>
 <script src = "js/age_rating_distribution_plot.js"></script>
 <script src = "js/topic_wordcloud_plot.js"></script>
+<script src = "js/sankey.js"></script>
 <script src = "js/mood_sankey.js"></script>
 
 

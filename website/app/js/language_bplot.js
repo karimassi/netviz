@@ -132,7 +132,7 @@ class RacingBarsAudio {
         .duration(this.tickDuration)
         .ease(d3.easeLinear)
         .attr('width', d => x(d.count)-x(0)-1)
-        .attr('y', d => y(this.top_n+100)+5)
+        .attr('y', d => y(this.top_n+10)+5)
         .remove();
   }
 
@@ -171,7 +171,7 @@ class RacingBarsAudio {
         .duration(this.tickDuration)
         .ease(d3.easeLinear)
         .attr('x', d => x(-10))
-        .attr('y', d => y(this.top_n+100)+5)
+        .attr('y', d => y(this.top_n+10)+5)
         .remove();
   }
 
@@ -267,6 +267,3 @@ function instantiateRacingBars(svg, data_path) {
   });
   
 }
-/* 
-
- */
