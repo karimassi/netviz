@@ -13,10 +13,11 @@ const DEPENDENCIES = require('./dependencies.js')
 
 const files = {
   js: 'app/js/**/*.js',
+  dependencyJS: 'app/js-dependencies/**/*.js',
   css: ['app/css/**/*.css', 'app/css/**/*.sass', 'app/css/**/*.scss'],
   html: 'app/**/*.html',
-  data: ['app/**/*.csv', 'app/**/*.json'], 
-  images: ['app/**/*.png', 'app/**/*.jpg'] 
+  data: ['app/**/*.csv', 'app/**/*.json'],
+  images: ['app/**/*.png', 'app/**/*.jpg']
 }
 
 function syncBrowser() {
@@ -35,6 +36,11 @@ function prepareJs() {
       .pipe(babel())
       .pipe(uglify())
     .pipe(sourcemaps.write('./'))
+    .pipe(dest('dist/js'))
+}
+
+function prepareDependencyJS() {
+  return src(files.dependencyJS)
     .pipe(dest('dist/js'))
 }
 
@@ -64,6 +70,7 @@ function prepareImages() {
 }
 
 function watchFiles() {
+  watch(files.dependencyJS, prepareDependencyJS)
   watch(files.js, prepareJs)
   watch(files.css, prepareCss)
   watch(files.html, prepareHTML)
@@ -87,7 +94,9 @@ function includeCssDependencies() {
 function build() {
   return series(
     // parallel(includeJsDependencies, includeCssDependencies),
-    parallel(prepareJs, prepareCss, prepareHTML, prepareData, prepareImages)
+    parallel(
+      prepareDependencyJS, prepareJs, prepareCss,
+      prepareHTML, prepareData, prepareImages)
   )
 }
 
