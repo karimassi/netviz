@@ -1,43 +1,59 @@
 $(function() {
-    // append the svg object to the body of the page
-    var width = 1000
-    var height = 400
-
-    var svg = d3.select("#world-map")
-    .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-    .append("g")
-
-    // Map and projection
-    var path = d3.geoPath();
-    var projection = d3.geoMercator()
-    .scale(100)
-    .center([0,0])
-    .translate([width / 2, height / 2 + 80]);
-
-    // Data and color scale
-    var data = d3.map();
-
-    // Load external data and boot
-    d3.queue()
-    .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
-    .await(ready);
-
-    function ready(error, topo) {
-
-    // Draw the map
-    svg.append("g")
-        .selectAll("path")
-        .data(topo.features)
-        .enter()
-        .append("path")
-        // draw each country
-        .attr("d", d3.geoPath()
-            .projection(projection)
-        )
-        // set the color of each country
-        .attr("fill", "white")
-        }
+  const map =  new WorldMapPlot("#world-map");
+  d3.json("data/countries_info.json").then(data => {
+    map.draw((name => {
+      updateCountryPassport(name, data)
+    }))
+  });
 })
 
+function updateCountryPassport(name, info) {
+  $( "#country-passport" ).find("h4").text(name)
+  if (typeof info[name] == 'undefined') {
+      $("#country-passport").find("p").text("No information available for that country...")
+  } else {
+      $("#country-passport").find("p").html(`There are ${info[name].count_movies} movies and ${info[name].count_series} series available in this country.<br><br>The top 10 genres are ${info[name].genres.join(', ')}.`)
+  }
+}
+
+class WorldMapPlot {
+  constructor(id) {
+    this.id = id
+  }
+
+  draw(callback) {
+    $(this.id).vectorMap({
+      map: 'world_mill',
+      // zoomOnScroll: true, 
+      // panOnDrag: true, 
+      hoverColor: false,
+      backgroundColor: '#000',
+      regionsSelectable: true,
+      regionsSelectableOne: true,
+      regionStyle: {
+        initial: {
+          fill: 'gray',
+          "fill-opacity": 1,
+        },
+        hover: {
+          "fill-opacity": 0.8,
+        },
+        selected: {
+          fill: 'red'
+        },
+        selectedHover: {
+          "fill-opacity": 1,
+        }
+      },
+      zoomMax: 8, 
+      zoomMin: 1, 
+      zoomStep: 1.6,
+      onRegionSelected: ((event, code, isSelected) => {
+        if (isSelected) {
+          let map=$('#world-map').vectorMap('get', 'mapObject');
+          callback(map.getRegionName(code))
+        }
+      })
+    });  
+  }
+}

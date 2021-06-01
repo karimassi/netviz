@@ -11,7 +11,7 @@ $(() => {
 
 function createSankeyMood(svg, data) {
 
-    let [sizeX, sizeY] = [1350, 380];
+    let [sizeX, sizeY] = [1350, 900];
     svg.attr('viewBox', `0 0 ${sizeX} ${sizeY}`); // viewbox : 0 0 widt height
 
     // set the dimensions and margins of the graph
@@ -19,12 +19,8 @@ function createSankeyMood(svg, data) {
 
     var units = "Widgets";
 
-    var formatNumber = d3.format(",.0f"),    // zero decimal places
-    format = function(d) { return formatNumber(d) + " " + units; },
-    color = "#db0000";
-    
-    var x = d3.scaleLinear()
-        .domain([0, d3.max(data.map(function(d) { return d.value;}))]);
+    var formatNumber = d3.format(",.0f");    // zero decimal places
+    var format = function(d) { return formatNumber(d) + " " + units; };
 
     var svg = svg
         .append("g")
@@ -32,8 +28,8 @@ function createSankeyMood(svg, data) {
         .attr('transform', `translate(0, ${sizeY - 50})`);
         
     var sankey = d3.sankey()
-        .nodeWidth(36)
-        .nodePadding(40)
+        .nodeWidth(20)
+        .nodePadding(10)
         .size([sizeX, sizeY]);
 
     var path = sankey.link();
@@ -50,7 +46,7 @@ function createSankeyMood(svg, data) {
                             "target": d.target,
                             "value": +d.value });
         });
-        console.log(data);
+
         // return only the distinct / unique nodes
         graph.nodes = d3.keys(d3.nest()
             .key(function (d) { return d.name; })
@@ -68,18 +64,19 @@ function createSankeyMood(svg, data) {
             graph.nodes[i] = { "name": d };
         });
 
-        sankey
+/*         console.log(graph);
+ */        sankey
             .nodes(graph.nodes)
             .links(graph.links)
             .layout(32);
-        console.log(sankey);
-        // add in the links
+
+             // add in the links
         var link = svg.append("g").selectAll(".link")
             .data(graph.links)
         .enter().append("path")
             .attr("class", "link")
             .attr("d", path)
-            .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+            .style("stroke-width", function(d) { return Math.max(2, d.dy); })
             .sort(function(a, b) { return b.dy - a.dy; });
 
         // add the link titles
@@ -106,10 +103,13 @@ function createSankeyMood(svg, data) {
 
         // add the rectangles for the nodes
         node.append("rect")
-            .attr("height", function(d) { return d.dy; })
+            .attr("height", function(d) { 
+                //console.log(d);
+                //console.log(d.dy);
+                return d.dy; })
             .attr("width", sankey.nodeWidth())
             .style("fill", function(d) { 
-                return d.color = color(d.name.replace(/ .*/, "")); })
+                return d.color = "#db0000"; })
             .style("stroke", function(d) { 
                 return d3.rgb(d.color).darker(2); })
         .append("title")
@@ -139,7 +139,7 @@ function createSankeyMood(svg, data) {
                         ) + ")");
             sankey.relayout();
             link.attr("d", path);
-        }
+        } 
 })
 
 }
