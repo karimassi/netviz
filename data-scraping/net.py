@@ -5,4 +5,8 @@ def get(suburl=''):
     WEBSITE = 'https://www.flixwatch.co/'
     url = f'{WEBSITE}{suburl}' if not suburl.startswith(WEBSITE) else suburl
     doc = requests.get(url).text
-    return BeautifulSoup(doc, 'html.parser')
+    parser = 'html.parser'
+    ext = suburl.split('.')[-1]
+    if ext == 'xml':
+        parser = 'lxml'
+    return BeautifulSoup(doc, parser)

@@ -11,8 +11,15 @@ with open('title_links.txt', 'r') as f:
 
 # print(title_urls[:5])
 
+# with open('title_data.json', 'r') as f:
+#     title_list = json.load(f)
+
+
 with Pool() as p:
     title_list = list(filter(lambda x: x is not None, p.map(scrap_movie_page, title_urls)))
+
+print(len(title_list))
+
 
 with open('title_data.json', 'w') as f:
     json.dump(title_list, f)
