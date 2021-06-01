@@ -275,6 +275,7 @@ class TimeSelector {
       .attr('font-size', '1.3em')
       .style('alignment-baseline', 'hanging')
       .style('text-anchor', 'start')
+      .style('user-select', 'none')
       .text(this.createText(this.interval[0]));
 
     const plotDesc = this.baseEl.attr('plot-description');

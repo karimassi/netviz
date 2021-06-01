@@ -221,6 +221,7 @@ class RangeSelector {
         .attr('x', year => scaleX(new Date(`01-01-${year}`)))
         .attr('y', 44)
         .style('font-size', '.5em')
+        .style('user-select', 'none')
         .style('text-anchor', 'middle')
         .style('alignment-baseline', 'hanging')
         .text(year => year);

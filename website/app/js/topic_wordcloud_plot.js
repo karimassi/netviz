@@ -55,12 +55,12 @@ class WordCloud {
           .data(words)
           .enter()
           .append('text')
-            .attr('font-size', d => `${d.size}px`)
             .attr('text-anchor', 'middle')
             .attr('fill', (d, i) => colorPicker.getColor())
             .attr('transform', d =>
               `translate(${d.x}, ${d.y}) rotate(${d.rotate})`)
             .style('opacity', 0)
+            .style('font-size', d => `${d.size}px`)
             .text(d => d.text)
             .transition(appearTransition)
             .duration(d =>  1000 + (1 - d.size / maxSize) * 5000)
@@ -75,6 +75,7 @@ class WordCloud {
         text: w
       })))
       .padding(10)
+      .rotate((d, i) => /*~~(Math.random() * 2)*/ (i % 2) * 90)
       .fontSize((d, i) => Math.max(5, 60 - i * 3))
       .on('end', d => this.drawWords(d, layout, this.processingId));
     this.processingId++;
@@ -87,7 +88,7 @@ $(() => {
   const words = [
     'Drama', 'Teens', 'Teenagers', 'Romance', 'College', 'Humour', 'Mission',
     'Car', 'Graduation', 'College', 'Summer', 'Klara', 'Pera', 'Mara', 'Sara',
-    'Tara', 'Sanja', 'Marko', 'Prijestolonaslednikovica'
+    'Tara', 'Sanja', 'Marko'
   ];
   const cloud = new WordCloud(
     'topic-wordcloud');
