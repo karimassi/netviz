@@ -30,7 +30,7 @@ class BusiestMonthStackedBarPlot {
 
     yScale() {
         return d3.scaleLinear()
-        .domain([0,2000])
+        .domain([0,2500])
         .range([ this.height, 0]);
     }
 
