@@ -2,20 +2,21 @@
     cursor: move;
     fill-opacity: .9;
     shape-rendering: crispEdges;
+    fill : #fff;
   }
   
   .node text {
-    fill : #db0000;
+    fill : #fff;
     pointer-events: none;
-    text-shadow: 0 1px 0 #fff;
+    font-size:20px
   }
   
   .link {
-    fill: #ffffff;
-    stroke: #fff;
+    fill: none;
+    stroke: #db0000;
     stroke-opacity: .2;
   }
   
   .link:hover {
-    stroke-opacity: .5;
+    stroke-opacity: 0.5;
   }

@@ -41,6 +41,7 @@ class BusiestMonthStackedBarPlot {
         .attr("transform", "translate(40,0)")
         .call(d3.axisLeft(y).ticks(5))
         .selectAll("text")
+        .transition().duration(100)
           .style('fill', 'whitesmoke')
           .style('font-size', '0.7rem');
     }
@@ -89,12 +90,7 @@ class BusiestMonthStackedBarPlot {
         this.height = 380;
         this.svg.attr('viewBox', `0 0 ${this.width} ${this.height}`);
 
-        this.createXaxis();
-        this.createYaxis();
-
         this.initiateBars() ;
-
-        this.createTooltips();
     }
 
     updateData() {
@@ -114,21 +110,25 @@ class BusiestMonthStackedBarPlot {
 
         var tooltip = d3.select('div#busiest-month');
 
+        this.createTooltips();
+
         //setup tooltip
         var mouseover = function(d) {
             var subgroupName = d3.select(this.parentNode).datum().key;
             var subgroupValue = d.data[subgroupName];
             tooltip
                 .html(subgroupName + "<br>" + "Count: " + subgroupValue)
-                .style("opacity", 1)
                 .style('color', 'black')
+                .transition().duration(2100)
+                .style('opacity', 1)
           }
         var mousemove = function(d) {
             var x = d3.event.x,
             y = d3.event.y;
             tooltip
-            .style("left", (x + 10) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+            .style("left", (x + 10) + "px") // It is important to put the +10: other wise the tooltip is exactly where the point is an it creates a weird effect
             .style("top", y + "px")
+            .style('opacity',0)
         }
         var mouseleave = function(d) {
             tooltip.style("opacity", 0)
@@ -155,7 +155,8 @@ class BusiestMonthStackedBarPlot {
             .transition(transition)
             .attr("y", function(d) { return y(d[1]); })
             .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-            .delay(function(d,i) {return i*200})
+            //.delay(function(d,i) {return i*200})
+        
     }
     }
 

@@ -21,8 +21,8 @@ class RacingBarsAudio {
     if (this.currentData.length > 0) {
       dateSlice = this.currentData.filter(d => d.release_date == this.datesValues[this.ini_date]);
     }
-    return d3.scaleLinear()
-    .domain([0, d3.max(dateSlice, d => d.count)])
+    return d3.scaleLog()
+    .domain([1, d3.max(dateSlice, d => d.count)])
     .range([this.margin.left, this.width-this.margin.right-65]);
   }
 
@@ -71,7 +71,7 @@ class RacingBarsAudio {
 
   intiateBars(dateSlice) {
 
-    let x = this.xScale().domain([0, d3.max(dateSlice, d => d.count)]);
+    let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]);
     let y = this.yScale();
 
     this.svg.selectAll('rect.bar')
@@ -79,8 +79,8 @@ class RacingBarsAudio {
         .enter()
         .append('rect')
         .attr('class', 'bar')
-        .attr('x', x(0)+1)
-        .attr('width', d => x(d.count)-x(0)-1)
+        .attr('x', x(1))
+        .attr('width', d => x(d.count)-x(1)-1)
         .attr('y', d => y(d.rank)+5)
         .attr('height', y(1)-y(0)-this.barPadding)
         .style('fill', '#db0000');
@@ -90,7 +90,7 @@ class RacingBarsAudio {
         .enter()
         .append('text')
         .attr('class', 'label')
-        .attr('x', d => x(d.count)-8)
+        .attr('x', d => x(1)-8)
         .attr('y',d => y(d.rank)+5+((y(1)-y(0))/2)+1)
         .style('text-anchor', 'end')
         .style('fill', 'whitesmoke')
@@ -100,7 +100,7 @@ class RacingBarsAudio {
   }
 
   updateBars(dateSlice) {
-    let x = this.xScale().domain([0, d3.max(dateSlice, d => d.count)]);
+    let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]);
     let y = this.yScale();
 
     let bars = this.svg.selectAll('.bar').data(dateSlice, d => d.audio);
@@ -109,8 +109,8 @@ class RacingBarsAudio {
         .enter()
         .append('rect')
         .attr('class', d => `bar ${d.audio.replace(/\s/g,'_')}`)
-        .attr('x', x(0)+1)
-        .attr( 'width',d => x(d.count)-x(0)-1)
+        .attr('x', x(1))
+        .attr( 'width',d => x(d.count)-x(1)-1)
         .attr('y', d => y(this.top_n+1)+5)
         .attr('height', y(1)-y(0)-this.barPadding)
         .style('fill', '#db0000')
@@ -123,7 +123,7 @@ class RacingBarsAudio {
       .transition()
         .duration(this.tickDuration)
         .ease(d3.easeLinear)
-        .attr('width', d => x(d.count)-x(0)-1)
+        .attr('width', d => x(d.count)-x(1)-1)
         .attr('y', d => y(d.rank)+5);
 
       bars
@@ -131,14 +131,14 @@ class RacingBarsAudio {
       .transition()
         .duration(this.tickDuration)
         .ease(d3.easeLinear)
-        .attr('width', d => x(d.count)-x(0)-1)
+        .attr('width', d => x(d.count)-x(1)-1)
         .attr('y', d => y(this.top_n+10)+5)
         .remove();
   }
 
   updateLabels(dateSlice) {
 
-    let x = this.xScale().domain([0, d3.max(dateSlice, d => d.count)]);
+    let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]);
     let y = this.yScale();
 
     let labels = this.svg.selectAll('.label')
@@ -148,7 +148,7 @@ class RacingBarsAudio {
       .enter()
       .append('text')
       .attr('class', 'label')
-      .attr('x', d => x(-10))
+      .attr('x', d => x(1)-8)
       .attr('y', d => y(this.top_n+1)+5+((y(1)-y(0))/2))
       .style('text-anchor', 'end')
       .style('fill', 'whitesmoke')
@@ -162,7 +162,7 @@ class RacingBarsAudio {
       .transition()
       .duration(this.tickDuration)
         .ease(d3.easeLinear)
-        .attr('x', x(-10))
+        .attr('x', x(1)-8)
         .attr('y', d => y(d.rank)+5+((y(1)-y(0))/2)+1);
 
     labels
@@ -170,7 +170,7 @@ class RacingBarsAudio {
       .transition()
         .duration(this.tickDuration)
         .ease(d3.easeLinear)
-        .attr('x', d => x(-10))
+        .attr('x', d => x(1)-8)
         .attr('y', d => y(this.top_n+10)+5)
         .remove();
   }
@@ -185,18 +185,18 @@ class RacingBarsAudio {
 
       dateSlice.forEach((d,i) => d.rank = i);
       
-      let x = this.xScale().domain([0, d3.max(dateSlice, d => d.count)]); 
-      let xAxis = d3.axisTop()
+      let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]); 
+      /* let xAxis = d3.axisTop()
         .scale(x)
         .ticks(this.width > 500 ? 5:2)
         .tickSize(-(this.height-this.margin.top-this.margin.bottom))
-        .tickFormat(d => d3.format(',')(d));
+        .tickFormat(d => d3.format(',')(d)); */
 
-      this.svg.select('.xAxis')
+     /*  this.svg.select('.xAxis')
         .transition()
         .duration(this.tickDuration)
         .ease(d3.easeLinear)
-        .call(xAxis);
+        .call(xAxis); */
         
       
       this.updateBars(dateSlice) ;
@@ -225,13 +225,6 @@ class RacingBarsAudio {
     .attr("height", `translate(0, ${this.height - 50})`)
 
     this.createXaxis();
-    
-    this.svg.append("text")
-    .attr("class", "subTitle")
-    .attr("y", 20)
-    .attr('x', 0)
-    .text(d => "Number of items")
-    .style('fill', 'whitesmoke');
   }
 }
 

@@ -1,48 +1,58 @@
 // code adapted from https://bl.ocks.org/d3noob/06e72deea99e7b4859841f305f63ba85
 
-$(() => {
-    let svg = d3.select('svg#mood');
-    let data = 'data/mood.csv';
-
-    createSankeyMood(svg, data) ;
-
-})
 
 
-function createSankeyMood(svg, data) {
+class SankeyMood {
+    constructor(svgElement) {
+        this.svg = svgElement;
+        this.currentData = {};
+        this.MONTHS = [];
+        this.width = 0;
+        this.height = 0;
+        this.margin = {};
+        this.setup();
+    }
 
-    let [sizeX, sizeY] = [1350, 900];
-    svg.attr('viewBox', `0 0 ${sizeX} ${sizeY}`); // viewbox : 0 0 widt height
+    setup (){
+        this.width = 1100,
+        this.height =  600;
+        this.margin = {top: 40, right: 115, bottom: 50, left: 100};
+        this.svg.attr('viewBox', `0 -10 ${this.width} ${this.height}`); // viewbox : 0 0 widt height
 
-    // set the dimensions and margins of the graph
-    var margin = {top: 10, right: 30, bottom: 50, left: 70};
+        // set the dimensions and margins of the graph
 
-    var units = "Widgets";
-
-    var formatNumber = d3.format(",.0f");    // zero decimal places
-    var format = function(d) { return formatNumber(d) + " " + units; };
-
-    var svg = svg
+        this.svg = this.svg
         .append("g")
-        .attr('width', sizeX)
-        .attr('transform', `translate(0, ${50})`);
+        .attr("transform", "translate(125,0)");
+
+    }
+
+    createSankey() {
+
+        let MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September', 'October', 'November', 'December'];
+
+
+        var units = "Widgets";
+
+        var formatNumber = d3.format(",.0f");    // zero decimal places
+        var format = function(d) { return formatNumber(d) + " " + units; };
+
         
-    var sankey = d3.sankey()
+        var sankey = d3.sankey()
         .nodeWidth(20)
         .nodePadding(10)
-        .size([sizeX, sizeY]);
+        .size([this.width-this.margin.right-this.margin.left, this.height-this.margin.bottom-this.margin.top]);
 
-    var path = sankey.link();
-
-    d3.csv(data).then(function(data) {
+        var path = sankey.link();
 
         //set up graph in same style as original example but empty
         let graph = {"nodes" : [], "links" : []};
 
-        data.forEach(function (d) {
-            graph.nodes.push({ "name": d.source });
+
+        this.currentData.forEach(function (d) {
+            graph.nodes.push({ "name": MONTHS[d.source-1] });
             graph.nodes.push({ "name": d.target });
-            graph.links.push({ "source": d.source,
+            graph.links.push({ "source": MONTHS[d.source-1],
                             "target": d.target,
                             "value": +d.value });
         });
@@ -64,14 +74,14 @@ function createSankeyMood(svg, data) {
             graph.nodes[i] = { "name": d };
         });
 
-/*         console.log(graph);
- */        sankey
+        sankey
             .nodes(graph.nodes)
             .links(graph.links)
             .layout(32);
 
-             // add in the links
-        var link = svg.append("g").selectAll(".link")
+            // add in the links
+        var link = this.svg
+        .append("g").selectAll(".link")
             .data(graph.links)
         .enter().append("path")
             .attr("class", "link")
@@ -86,9 +96,9 @@ function createSankeyMood(svg, data) {
                     d.target.name + "\n" + format(d.value); });
 
         // add in the nodes
-        var node = svg.append("g").selectAll(".node")
+        var node = this.svg.append("g").selectAll(".node")
             .data(graph.nodes)
-        .enter().append("g")
+            .enter().append("g")
             .attr("class", "node")
             .attr("transform", function(d) { 
                 return "translate(" + d.x + "," + d.y + ")"; })
@@ -103,10 +113,7 @@ function createSankeyMood(svg, data) {
 
         // add the rectangles for the nodes
         node.append("rect")
-            .attr("height", function(d) { 
-                //console.log(d);
-                //console.log(d.dy);
-                return d.dy; })
+            .attr("height", function(d) {return d.dy; })
             .attr("width", sankey.nodeWidth())
             .style("fill", function(d) { 
                 return d.color = "#db0000"; })
@@ -118,17 +125,18 @@ function createSankeyMood(svg, data) {
 
         // add in the title for the nodes
         node.append("text")
-            .attr("x", -6)
+            .attr("x", 25)
             .attr("y", function(d) { return d.dy / 2; })
             .attr("dy", ".35em")
-            .attr("text-anchor", "end")
+            .attr("text-anchor", "start")
             .attr("transform", null)
             .text(function(d) { return d.name; })
-        .filter(function(d) { return d.x < sizeX / 2; })
-            .attr("x", 6 + sankey.nodeWidth())
-            .attr("text-anchor", "start");
+        .filter(function(d) { return d.x < 550; })
+            .attr("x", -10)
+            .attr("text-anchor", "end")
+            .style("font-size", "20px");
 
-        // the function for moving the nodes
+            // the function for moving the nodes
         function dragmove(d) {
             d3.select(this)
                 .attr("transform", 
@@ -140,6 +148,33 @@ function createSankeyMood(svg, data) {
             sankey.relayout();
             link.attr("d", path);
         } 
-})
+    }
+}
+
+function instantiateMoodSankey(svg, data_path) {
+    let plot = new SankeyMood(svg);
+    
+    function showInitialPlot() {
+        svg.style('opacity', 0);
+        svg.transition()
+            .delay(1000)
+            .duration(600)
+            .style('opacity', 1);
+    }
+
+    d3.csv(data_path).then(function(data) {
+        plot.currentData = data;
+        plot.createSankey();
+    });
+
+    
 
 }
+
+$(() => {
+    let svg = d3.select('svg#mood');
+    let data_path= 'data/mood.csv';
+
+    instantiateMoodSankey(svg, data_path) ;
+
+})

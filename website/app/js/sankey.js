@@ -157,7 +157,7 @@ d3.sankey = function() {
     function computeNodeDepths(iterations) {
       var nodesByBreadth = d3.nest()
           .key(function(d) { return d.x; })
-          .sortKeys(d3.ascending)
+          //.sortKeys(d3.ascending)
           .entries(nodes)
           .map(function(d) { return d.values; });
   
@@ -227,7 +227,7 @@ d3.sankey = function() {
               i;
   
           // Push any overlapping nodes down.
-          nodes.sort(ascendingDepth);
+          //nodes.sort(ascendingDepth);
           for (i = 0; i < n; ++i) {
             node = nodes[i];
             dy = y0 - node.y;
@@ -257,10 +257,10 @@ d3.sankey = function() {
     }
   
     function computeLinkDepths() {
-      nodes.forEach(function(node) {
+      /* nodes.forEach(function(node) {
         node.sourceLinks.sort(ascendingTargetDepth);
         node.targetLinks.sort(ascendingSourceDepth);
-      });
+      }); */
       nodes.forEach(function(node) {
         var sy = 0, ty = 0;
         node.sourceLinks.forEach(function(link) {
