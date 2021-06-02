@@ -21,7 +21,7 @@ class WordCloud {
     this.setup();
   }
 
-  setup(wods) {
+  setup() {
     const main_color = 'whitesmoke';
     let [sizeX, sizeY] = [700, 500];
     this.svg.attr('viewBox', `0 0 ${sizeX} ${sizeY}`);
@@ -76,7 +76,7 @@ class WordCloud {
       })))
       .padding(10)
       .rotate((d, i) => /*~~(Math.random() * 2)*/ (i % 2) * 90)
-      .fontSize((d, i) => Math.max(5, 60 - i * 3))
+      .fontSize((d, i) => Math.max(15, 60 - i * 3))
       .on('end', d => this.drawWords(d, layout, this.processingId));
     this.processingId++;
     layout.start();
@@ -84,22 +84,37 @@ class WordCloud {
 }
 
 $(() => {
+  const NUMBER_OF_WORDS = 30;
+  const month_names = [
+    "January", "February", "March", "April", "May", "June", "July",
+    "August", "September", "October", "November", "December"];
 
-  const words = [
-    'Drama', 'Teens', 'Teenagers', 'Romance', 'College', 'Humour', 'Mission',
-    'Car', 'Graduation', 'College', 'Summer', 'Klara', 'Pera', 'Mara', 'Sara',
-    'Tara', 'Sanja', 'Marko'
-  ];
   const cloud = new WordCloud(
     'topic-wordcloud');
 
-  cloud.updateWords(words);
 
+  let words = {};
+  for(let i = 1; i <= 12; i++) {
+    words[i] = [];
+  }
 
-  $('#btn-1').click(() => {
-    cloud.updateWords([
-      'Olja', 'Pera', 'Mica', 'Stefan', 'Marko', 'Serafina', 'Ljubivoj', 'Nikola',
-      'Sanja', 'Marijana', 'Merima', 'Ostoja'
-    ]);
+  const selector = new TimeSelector(
+    'word-cloud-time-selection',
+    [1, 12],
+    month => cloud.updateWords(words[month]),
+    60000,
+    'int',
+    month_int => month_names[month_int - 1]
+  );
+
+  d3.json('data/keywords_per_month.json').then(data => {
+    Object.keys(data).map(key => {
+      let pairs = Object.entries(data[key]);
+      pairs.sort((a, b) => b[1] - a[1]);
+
+      words[key] = pairs.map(x => x[0]).slice(0, NUMBER_OF_WORDS).map(x => x[0].toUpperCase() + x.slice(1));
+    });
+
+    selector.setValue(1);
   });
 });

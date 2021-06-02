@@ -12,16 +12,17 @@ class TimeSelector {
    *      to go from beginning to end. This is used to calculate the speed of
    *      movement and the whole sequence may take more or less time than indicated.
    *  - scalingType: type of interval (supported: date, int, float)
-   *  - dateFormatter: function that maps Date object to string. The function
-   *      is called only when date scalingType is used
+   *  - dataFormatter: function that maps object to string. If the function
+   *      is not specified default javascript's 'toString' will we invoced
    */
-  constructor(id, interval, onPercentageSelectedCallback, traverseTime, scalingType, dateFormatter) {
+  constructor(id, interval, onPercentageSelectedCallback,
+      traverseTime, scalingType, dataFormatter) {
     this.baseEl = d3.select(`#${id}`);
     this.id = id;
     this.dragging = false;
     this.interval = interval;
     this.onPercentageSelectedCallback = onPercentageSelectedCallback;
-    this.dateFormatter = dateFormatter;
+    this.dataFormatter = dataFormatter;
     this.scalingType = scalingType;
     const totalTicks = traverseTime / 1000 * TICKS_PER_SECOND;
     this.increasePerTick = 1 / totalTicks;
@@ -86,8 +87,8 @@ class TimeSelector {
    * Maps value to string properly depending on scalingType
    */
   getDisplayableValue(value) {
-    if(this.scalingType == 'date') {
-      return this.dateFormatter(value);
+    if(this.dataFormatter !== undefined){
+      return this.dataFormatter(value);
     }
     else {
       return value + '';
@@ -104,15 +105,34 @@ class TimeSelector {
   }
 
   /**
-   * Get proper value depending on percentage and calls the callback with the
-   *  given value as the parameter
+   *  Calls the callback and puts the value aside so it can check later not to
+   *    call the callback with the same value
    */
-  emitPercentage(percentage) {
-    const value = this.scaling(percentage);
+  invokeCallback(value) {
     if(value != this.lastEmit) {
       this.onPercentageSelectedCallback(value);
     }
     this.lastEmit = value;
+  }
+
+  /**
+  * Get proper value depending on percentage and calls invokeCallback to take
+  *   care of notifying application
+  */
+  emitPercentage(percentage) {
+    const value = this.scaling(percentage);
+    this.invokeCallback(value);
+  }
+
+  /**
+   * Sets percentage to point to given value and invokes the callback
+   */
+  setValue(value) {
+    const percentage = this.scaling.invert(value);
+    if(percentage >= 0 && percentage <= 1) {
+      this.setPercentage(percentage, true);
+      this.invokeCallback(value);
+    }
   }
 
   /**
@@ -281,8 +301,12 @@ class TimeSelector {
     const plotDesc = this.baseEl.attr('plot-description');
     if(plotDesc !== undefined) {
       rowDiv.append('div')
-        .attr('class', 'col-md-7 col-12 my-auto plot-description')
-        .html(`<i class="bi bi-info-circle-fill"></i> ${plotDesc}`);
+        .attr('class', 'col-md-1 col-1 my-auto plot-description')
+        .style('text-align', 'right')
+        .html('<i class="bi bi-info-circle-fill"></i>');
+      rowDiv.append('div')
+        .attr('class', 'col-md-6 col-11 my-auto plot-description')
+        .html(plotDesc);
     }
   }
 }

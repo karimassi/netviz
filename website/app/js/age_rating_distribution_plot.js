@@ -270,13 +270,21 @@ $(() => {
 
   const stats_for_year = {};
 
+  const selector = new TimeSelector(
+    'content-time-selection',
+    [2015, 2021],
+    year => plot.updateData(stats_for_year[year]),
+    10000,
+    'int'
+  );
+
   function showInitialPlot() {
     svg.style('opacity', 0);
     svg.transition()
       .delay(1000)
       .duration(600)
       .style('opacity', 1);
-    plot.updateData(stats_for_year[2015]);
+    selector.setValue(2015);
   }
 
   d3.csv('data/age_rating_per_year_distribution.csv')
@@ -300,13 +308,7 @@ $(() => {
   });
 
 
-  const selector = new TimeSelector(
-    'content-time-selection',
-    [2015, 2021],
-    year => plot.updateData(stats_for_year[year]),
-    10000,
-    'int'
-  );
+
 
 
   // let i = 0;
