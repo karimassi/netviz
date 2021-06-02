@@ -25,7 +25,7 @@ function createSankeyMood(svg, data) {
     var svg = svg
         .append("g")
         .attr('width', sizeX)
-        .attr('transform', `translate(0, ${sizeY - 50})`);
+        .attr('transform', `translate(0, ${50})`);
         
     var sankey = d3.sankey()
         .nodeWidth(20)
