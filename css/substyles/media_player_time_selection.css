@@ -1,0 +1,13 @@
+.time-selector {
+  background-color: #1f1f2e;
+  border-radius: 4px; }
+  .time-selector .play-control {
+    min-height: 60px;
+    color: whitesmoke;
+    font-size: 3em; }
+  .time-selector .plot-description {
+    text-align: left;
+    font-size: 1.3em;
+    color: whitesmoke; }
+
+/*# sourceMappingURL=media_player_time_selection.css.map */

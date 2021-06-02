@@ -1,0 +1,1 @@
+{"version":3,"sources":["substyles/heading_symbols.scss"],"names":[],"mappings":"AAAA;EACE,2BAA0B,EAAA","file":"heading_symbols.css","sourcesContent":[".abc h2::after {\n  content:\"\\2212\" !important;\n}\n"]}

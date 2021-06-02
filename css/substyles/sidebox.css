@@ -9,7 +9,7 @@
   height: 400px; }
   .side-box h4 {
     display: inline-block;
-    color: whitesmoke;
+    color: red;
     position: relative; }
     .side-box h4::after {
       content: '';

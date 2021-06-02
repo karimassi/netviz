@@ -18,10 +18,8 @@
 <body>
     <div id="loading-screen" style="
         position: absolute;
-        width: 100vw;
-        height: 100vh;
-        top: 0;
-        right: 0;
+        width: 100%;
+        height: 100%;
         z-index: 1000;
         background: red;
         display: flex;
@@ -57,8 +55,7 @@
                   <div class="animated-counter">
                     <h4>Movies</h4>
                     <div class="counter-data">
-                      <svg id = "counter-movies" height = "125px" width = "200px"></svg>
-                      <br></br>
+                      <span>7854</span>
                     </div>
                   </div>
                 </div>
@@ -66,8 +63,7 @@
                   <div class="animated-counter">
                     <h4>TV shows</h4>
                     <div class="counter-data">
-                      <svg id = "counter-shows" height = "125px" width = "200px"></svg>
-                      <br></br>
+                      <span>5962</span>
                     </div>
                   </div>
                 </div>
@@ -75,7 +71,7 @@
                   <div class="animated-counter">
                     <h4>Countries</h4>
                     <div class="counter-data">
-                      <svg id = "counter-countries" height = "150px" width = "200px"></svg>
+                      <span>190</span>
                     </div>
                   </div>
                 </div>
@@ -83,8 +79,7 @@
                   <div class="animated-counter">
                     <h4>Languages</h4>
                     <div class="counter-data">
-                      <svg id = "counter-audio" height = "125px" width = "200px"></svg>
-                      <br></br>
+                      <span>68</span>
                     </div>
                   </div>
                 </div>
@@ -137,7 +132,7 @@
               <div class="container pt-5">
                 <div class="row">
                   <div class="col-9">
-                    <div id="movies-network" class="network"></div>
+                    <div id="network"></div>
                   </div>
                   <div class="col-3">
                     <div class="side-box">
@@ -148,7 +143,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="row timeline">
+                <div class="row timeline">
                   <div class="col-1 text-center">
                     <button class="btn btn-default" id="btn-animation-network-play">
                       <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="90%" fill="white" class="bi bi-play-circle" viewBox="0 0 16 16">
@@ -172,7 +167,7 @@
                   <div class="col-1 text-center">
                     Network of items according to actor co-occurences
                   </div>
-                </div> -->
+                </div>
               </div>
             </div>
 
@@ -205,9 +200,8 @@
               <div class="justified-text" style="max-width: 700px; margin: 10px auto;">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </div>
-              <br></br>
-              <svg id="age-rating-distribution-plot"></svg>
-              <div id="content-time-selection" plot-description="Cumulative age rating distribution per year"></div>
+              <svg id="age-rating-distribution-plot" style="margin-bottom: 10px"></svg>
+              <div id="content-time-selection" plot-description="Cumulative age rating distribution over years"></div>
             </div>
           </div>
         </div>
@@ -221,20 +215,22 @@
               <div class="justified-text" style="max-width: 700px; margin: 10px auto;">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </div>
-              <svg id = "mood" width = "100%"></svg>
+              <svg id = "mood" height = "900px" width = "100%"></svg>
               <br></br>
-
-          <div class="section" id="content-for-everybody-page">
-            <div class="container">
-              <div class="section-heading">
-                <h2>Exploratory tool</h2>
-              </div>
-              <div class="section-body">
-                <svg id="exporatory-time-selection" width="100%"></svg>
-              </div>
             </div>
           </div>
         </div>
+        <div class="section" id="content-for-everybody-page">
+          <div class="container">
+            <div class="section-heading">
+              <h2>Exploratory tool</h2>
+            </div>
+            <div class="section-body">
+              <svg id="exporatory-time-selection" width="100%"></svg>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 
 <!-- Include libraries from CDN -->
@@ -265,17 +261,10 @@
 <script src="js/jquery-jvectormap-2.0.5.min.js"></script>
 <script src="js/jquery-jvectormap-world-mill.js"></script>
 
-<script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/sigma.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/plugins/sigma.parsers.json.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/plugins/sigma.parsers.gexf.min.js"></script>
-
 <!-- Our scripts -->
 <script src="js/media_player_time_selection.js" charset="utf-8"></script>
 <script src="js/range_selection.js" charset="utf-8"></script>
 
-<script src = "js/counter.js"></script>
 <script src = "js/world_map.js"></script>
 <script src = "js/network.js"></script>
 <script src = "js/busiest_month.js"></script>
@@ -298,7 +287,7 @@
       "Topics",
       "Age",
       "Genres",
-      "Exploratory Tool"
+      "abcs"
     ];
     var intro_loaded = false;
     var languages_loaded = false;
@@ -324,17 +313,6 @@
           svg.attr('visibility', 'visible');
           let data_path = "data/busiest_month.csv";
           instentiateBusiestMonth(svg, data_path) ;
-
-          instantiateCounter(7854,
-            d3.select('svg#counter-movies').attr('visibility', 'visible'));
-
-          instantiateCounter(5962,
-            d3.select('svg#counter-shows').attr('visibility', 'visible'));
-
-          instantiateCounter(190,
-            d3.select('svg#counter-countries').attr('visibility', 'visible'));
-          instantiateCounter(68,
-            d3.select('svg#counter-audio').attr('visibility', 'visible'));
         }
         if ((destination == 3) && !(languages_loaded)) {
           languages_loaded = true;
