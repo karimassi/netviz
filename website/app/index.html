@@ -16,6 +16,23 @@
   </head>
 
 <body>
+    <div id="loading-screen" style="
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        right: 0;
+        z-index: 1000;
+        background: red;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;">
+      <div class="testloader">
+          Prototype loading screen
+      </div>
+    </div>
     <div id="fullpage">
         <!-- HOME PAGE -->
         <div class="section">
@@ -174,7 +191,7 @@
               <svg id="topic-wordcloud"
                 height="500px"
                 width="100%"></svg>
-              <button type="button" id='btn-1' name="button">Click me</button>
+              <div id="word-cloud-time-selection" plot-description="Words best describing content released over months"></div>
             </div>
           </div>
         </div>
@@ -223,8 +240,8 @@
 <!-- Include libraries from CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js" 
-        integrity="sha512-FzESM/E7XJBqcJyrXa08gRcpp5rDHO661C0L3vH4NsZfUWUsjN4+t6Lg8h+e8TMR2aYijIrcT+CPGq7tSugRzA==" 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js"
+        integrity="sha512-FzESM/E7XJBqcJyrXa08gRcpp5rDHO661C0L3vH4NsZfUWUsjN4+t6Lg8h+e8TMR2aYijIrcT+CPGq7tSugRzA=="
         crossorigin="anonymous"
          referrerpolicy="no-referrer">
 </script>
@@ -280,7 +297,8 @@
       "Interconnected",
       "Topics",
       "Age",
-      "Genres"
+      "Genres",
+      "Exploratory Tool"
     ];
     var intro_loaded = false;
     var languages_loaded = false;
@@ -307,15 +325,15 @@
           let data_path = "data/busiest_month.csv";
           instentiateBusiestMonth(svg, data_path) ;
 
-          instantiateCounter(7854, 
+          instantiateCounter(7854,
             d3.select('svg#counter-movies').attr('visibility', 'visible'));
 
-          instantiateCounter(5962, 
+          instantiateCounter(5962,
             d3.select('svg#counter-shows').attr('visibility', 'visible'));
-          
-          instantiateCounter(190, 
+
+          instantiateCounter(190,
             d3.select('svg#counter-countries').attr('visibility', 'visible'));
-          instantiateCounter(68, 
+          instantiateCounter(68,
             d3.select('svg#counter-audio').attr('visibility', 'visible'));
         }
         if ((destination == 3) && !(languages_loaded)) {
@@ -325,6 +343,15 @@
           let data_path = "data/racing_audio.csv";
           instantiateRacingBars(svg, data_path) ;
         }
+      },
+      afterRender: () => {
+        const loadingScreen = d3.select('#loading-screen');
+
+        loadingScreen
+          .transition()
+          .duration(2000)
+          .style('opacity', 0)
+          .on('end', () => loadingScreen.style('display', 'none'));
       }
     });
   });
