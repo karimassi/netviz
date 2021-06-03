@@ -254,7 +254,8 @@ function instantiateRacingBars(svg, data_path) {
 
   var new_data = {} ;
 
-  const dateFormatter = date => `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`;
+  let MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December']
+  const dateFormatter = date => `${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
 
   const selector = new TimeSelector(
     'racing-audio-time-selection',
