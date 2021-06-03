@@ -23,15 +23,12 @@
         top: 0;
         right: 0;
         z-index: 1000;
-        background: red;
+        background: black;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;">
-      <div class="testloader">
-          Prototype loading screen
-      </div>
     </div>
     <div id="fullpage">
         <!-- HOME PAGE -->
@@ -200,18 +197,30 @@
               </div>
               <svg id = "mood" width = "100%"></svg>
               <br></br>
+            </div>
+          </div>
+        </div>
 
-          <div class="section" id="content-for-everybody-page">
-            <div class="container">
-              <div class="section-heading">
-                <h2>Exploratory tool</h2>
-              </div>
-              <div class="section-body">
-                <svg id="exporatory-time-selection" width="100%"></svg>
+        <div class="section" id="content-for-everybody-page">
+          <div class="container">
+            <div class="section-heading">
+              <h2>Exploratory tool</h2>
+            </div>
+            <div class="section-body">
+              <div class="row">
+                  <div class="col-12">
+                    <svg id="exporatory-time-selection" width="100%"></svg>
+                  </div>
+                  <div class="col-9">
+                    <div class="map" style="background-color: red">
+
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 </body>
 
 <!-- Include libraries from CDN -->
@@ -262,6 +271,8 @@
 <script src = "js/topic_wordcloud_plot.js"></script>
 <script src = "js/sankey.js"></script>
 <script src = "js/mood_sankey.js"></script>
+<!-- <script src = "js/simple-bar-plot.js"></script>
+<script src = "js/exploratory-page.js"></script> -->
 
 
 <script>
@@ -302,15 +313,15 @@
           let data_path = "data/busiest_month.csv";
           instentiateBusiestMonth(svg, data_path) ;
 
-          instantiateCounter(20211,
+          instantiateCounter(7854,
             d3.select('svg#counter-movies').attr('visibility', 'visible'));
 
-          instantiateCounter(5641,
+          instantiateCounter(5962,
             d3.select('svg#counter-shows').attr('visibility', 'visible'));
 
-          instantiateCounter(100,
+          instantiateCounter(190,
             d3.select('svg#counter-countries').attr('visibility', 'visible'));
-          instantiateCounter(95,
+          instantiateCounter(68,
             d3.select('svg#counter-audio').attr('visibility', 'visible'));
         }
         if ((destination == 3) && !(languages_loaded)) {
