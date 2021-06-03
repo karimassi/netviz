@@ -50,67 +50,6 @@ class RacingBarsAudio {
       .range([this.height-this.margin.bottom, this.margin.top]);
   }
 
-  dateText () {
-
-  const halo = function(text, strokeWidth) {
-    text.select(function() { return this.parentNode.insertBefore(this.cloneNode(true), this); })
-      .style('fill', '#000000')
-        .style( 'stroke','#000000')
-        .style('stroke-width', strokeWidth)
-        .style('stroke-linejoin', 'round')
-        .style('opacity', 1);
-    }
-    return this.svg.append('text')
-    .attr('class', 'dateText')
-    .attr('x', this.width-this.margin.right)
-    .attr('y', this.height-25)
-    .style('text-anchor', 'end')
-    .style('fill', '#ffffff')
-    .text(d => this.ini_date.toString())
-    .call(halo, 10);
-
-  }
-
-  intiateBars(dateSlice) {
-
-    let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]);
-    let y = this.yScale();
-
-    this.svg.selectAll('rect.bar')
-        .data(dateSlice, d => d.audio)
-        .enter()
-        .append('rect')
-        .attr('class', 'bar')
-        .attr('x', x(1))
-        .attr('width', d => x(d.count)-x(1)-1)
-        .attr('y', d => y(d.rank)+5)
-        .attr('height', y(1)-y(0)-this.barPadding)
-        .style('fill', '#db0000');
-
-    this.svg.selectAll('text.label')
-        .data(dateSlice, d => d.audio)
-        .enter()
-        .append('text')
-        .attr('class', 'label')
-        .attr('x', d => x(1)-8)
-        .attr('y',d => y(d.rank)+5+((y(1)-y(0))/2)+1)
-        .style('text-anchor', 'end')
-        .style('fill', 'whitesmoke')
-        .text(d => d.audio);
-
-    this.svg.selectAll('text.valueLabel')
-        .data(dateSlice, d=> d.audio)
-        .enter()
-        .append('text')
-        .attr('class', 'valueLabel')
-        .attr('x', d => x(d.count)+5)
-        .attr('y', d => y(d.rank)+5+((y(1)-y(0))/2))
-        .style('fill', 'whitesmoke')
-        .text(d => d.count);
-
-    this.datetext = this.dateText();
-  }
-
   updateBars(dateSlice) {
     let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]);
     let y = this.yScale();
@@ -279,47 +218,16 @@ class RacingBarsAudio {
       .slice(0, this.top_n);
       dateSlice.forEach((d,i) => d.rank = i);
 
-      let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]);
+    let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]);
 
-      if (dateSlice.length > 0) {
-        this.updateBars(dateSlice) ;
-        this.updateLabels(dateSlice) ;
-        this.updateValueLabels(dateSlice) ;
-      }
-
-
-      //this.datetext.text(d => this.datesValues[this.ini_date]);
-
-      //if(this.ini_date == new Date('2021-04-08')) ticker.stop();
-      this.ini_date = new Date(this.ini_date.setDate(this.ini_date.getDate() + 1));
-      /* console.log(this.ini_date); */
-/*       ++ this.ini_date ;
- */  }
-
- /*  ticker() {
-    let ticker = d3.interval(e => {
-
-      let dateSlice = this.currentData.filter(d => d.release_date == this.datesValues[this.ini_date])
-        .sort((a,b) => d3.ascending(a, b))
-        .slice(0,this.top_n);
-
-
-      dateSlice.forEach((d,i) => d.rank = i);
-
-      let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]);
-
-
+    if (dateSlice.length > 0) {
       this.updateBars(dateSlice) ;
       this.updateLabels(dateSlice) ;
       this.updateValueLabels(dateSlice) ;
+    }
 
-      this.datetext.text(d => this.datesValues[this.ini_date]);
-
-      if(this.datesValues[this.ini_date] == this.datesValues.slice(-1)) ticker.stop();
-      ++ this.ini_date ;
-    },this.tickDuration);
-
-  } */
+    this.ini_date = new Date(this.ini_date.setDate(this.ini_date.getDate() + 1));
+  }
 
   setup() {
     this.width = 2000;
@@ -389,3 +297,10 @@ function instantiateRacingBars(svg, data_path) {
   });
 
 }
+
+$(()=> {
+  let svg = d3.select('svg#most-languages') ;
+  let data_path = "data/racing_audio.csv";
+  instantiateRacingBars(svg, data_path)
+}
+)
