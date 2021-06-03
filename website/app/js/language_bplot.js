@@ -35,7 +35,7 @@ class RacingBarsAudio {
       .ticks(this.width > 500 ? 5:2)
       .tickSize(-(this.height-this.margin.top-this.margin.bottom))
       .tickFormat(d => d3.format(',')(d));
-      
+
     this.svg.append('g')
       .attr('class', 'axis xAxis')
       .attr('transform', `translate(0, ${this.margin.top})`)
@@ -68,7 +68,7 @@ class RacingBarsAudio {
     .style('fill', '#ffffff')
     .text(d => this.ini_date.toString())
     .call(halo, 10);
-    
+
   }
 
   intiateBars(dateSlice) {
@@ -130,7 +130,7 @@ class RacingBarsAudio {
           .duration(this.tickDuration)
           .ease(d3.easeLinear)
           .attr('y', d => y(d.rank)+5);
-       
+
       bars
       .transition()
         .duration(this.tickDuration)
@@ -155,7 +155,7 @@ class RacingBarsAudio {
 
     let labels = this.svg.selectAll('.label')
         .data(dateSlice, d => d.audio);
-       
+
     labels
       .enter()
       .append('text')
@@ -164,12 +164,12 @@ class RacingBarsAudio {
       .attr('y', d => y(this.top_n+1)+5+((y(1)-y(0))/2))
       .style('text-anchor', 'end')
       .style('fill', 'whitesmoke')
-      .text(d => d.audio)    
+      .text(d => d.audio)
       .transition()
         .duration(this.tickDuration)
         .ease(d3.easeLinear)
         .attr('y', d => y(d.rank)+5+((y(1)-y(0))/2));
-            
+
     labels
       .transition()
       .duration(this.tickDuration)
@@ -240,34 +240,56 @@ class RacingBarsAudio {
               this.textContent = Math.round(i(t));
             }
       });
-    
+
+  }
+
+  binarySearch(arr, date) {
+    let lower = 0, higher = arr.length - 1;
+
+    if(arr[lower].release_date > date) {
+      return 0;
+    }
+    if(arr[higher].release_date <= date) {
+      return arr[higher].count;
+    }
+
+    while(lower <= higher) {
+      const mid = Math.floor((lower + higher) / 2);
+      const midDate = arr[mid].release_date;
+      if(midDate == date) {
+        return arr[mid].count;
+      }
+      else if(midDate > date) {
+        higher = mid - 1;
+      }
+      else {
+        lower = mid + 1;
+      }
+    }
+    return arr[lower - 1].count;
   }
 
   updateData() {
-    let date = this.ini_date.getTime() ;
-    let dateSlice = this.currentData.filter( d => d.release_date.getTime() == date ) 
-        .sort((a,b) => d3.ascending(a, b))
-        .slice(0,this.top_n);
-
-    const country_counts = {};
-    for(let i = 0; i < this.currentData.length && this.currentData[i].release_date < this.init_date; i++) {
-      country_counts[this.currentData[i].audio] = this.currentData[i].count;
-    }
-    console.log(country_counts);
-
+    const date = this.ini_date.getTime();
+    let dateSlice = Object.entries(this.currentData).map(([audio, entries]) => ({
+        audio: audio,
+        count: this.binarySearch(entries, date)
+      }))
+      .sort((a,b) => b.count - a.count)
+      .slice(0, this.top_n);
       dateSlice.forEach((d,i) => d.rank = i);
-      
-      let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]); 
-        
+
+      let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]);
+
       if (dateSlice.length > 0) {
         this.updateBars(dateSlice) ;
         this.updateLabels(dateSlice) ;
         this.updateValueLabels(dateSlice) ;
       }
-      
+
 
       //this.datetext.text(d => this.datesValues[this.ini_date]);
-      
+
       //if(this.ini_date == new Date('2021-04-08')) ticker.stop();
       this.ini_date = new Date(this.ini_date.setDate(this.ini_date.getDate() + 1));
       /* console.log(this.ini_date); */
@@ -283,20 +305,20 @@ class RacingBarsAudio {
 
 
       dateSlice.forEach((d,i) => d.rank = i);
-      
-      let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]); 
-        
-      
+
+      let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]);
+
+
       this.updateBars(dateSlice) ;
       this.updateLabels(dateSlice) ;
       this.updateValueLabels(dateSlice) ;
 
       this.datetext.text(d => this.datesValues[this.ini_date]);
-      
+
       if(this.datesValues[this.ini_date] == this.datesValues.slice(-1)) ticker.stop();
       ++ this.ini_date ;
     },this.tickDuration);
-    
+
   } */
 
   setup() {
@@ -348,25 +370,22 @@ function instantiateRacingBars(svg, data_path) {
   }
 
   d3.csv(data_path).then(data => {
-    data.forEach(d => {
-      d.count = +d.count,
-      d.release_date = new Date(d.release_date)
+    const country_data = {};
+
+    data.forEach(entry => {
+      const country = entry.audio;
+      if(country_data[country] === undefined) {
+        country_data[country] = [];
+      }
+      country_data[country].push({
+        count: +entry.count,
+        release_date: new Date(entry.release_date)
+      });
     });
 
-    //new_data = data;
-    plot.currentData = data;
-
-    //plot.datesValues = d3.map(data, function(d) {return d.release_date}).keys();
-
-    let dateSlice = data.filter(d=> d.release_date.getTime() == plot.ini_date.getTime())
-    .sort((a,b) =>  d3.ascending(a, b))
-    .slice(0, plot.top_n);
-
-    dateSlice.forEach((d,i) => d.rank = i);
+    plot.currentData = country_data;
 
     plot.updateData() ;
-
-    //plot.ticker();
   });
 
 }
