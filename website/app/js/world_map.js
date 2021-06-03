@@ -9,13 +9,13 @@ $(function() {
 
 function updateCountryPassport(name, info) {
   $("#country-passport").empty()
-  $("#country-passport").append(`<h2>${name}</h2>`)
-  $("#country-passport").append("<p>Netflix has been available in this country since ...</p>")
-  $("#country-passport").append("<br>")
+  $("#country-passport").append(`<h2>${name}</h2><br>`)
   if (typeof info == 'undefined') {
-      $("#country-passport").append("<p>Unfortunately, no information is available for that country... Try selecting another one!</p>")
+      $("#country-passport").append("<p>Unfortunately, no information is available for that country... Try selecting another one!</p><br>")
       return 
   }
+  $("#country-passport").append("<p>Netflix has been available in this country since ...</p><br>")
+
   $("#country-passport").append("<h4>Movies</h4><br>")
   $("#country-passport").append(`<p class="count">${info.count_movies}</p><br>`)
   $("#country-passport").append("<h4>TV Shows</h4><br>")
