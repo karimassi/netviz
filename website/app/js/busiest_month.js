@@ -22,15 +22,15 @@ class BusiestMonthStackedBarPlot {
         .attr("transform", "translate(0," + this.height + ")")
         .call(d3.axisBottom(x))
         .selectAll("text")
-            .attr("transform", "translate(-10,0)rotate(-45)")
-            .style("text-anchor", "end")
+            //.attr("transform", "translate(-10,0)rotate(-45)")
+            .style("text-anchor", "middle")
             .style('fill', 'whitesmoke')
             .style('font-size', '1rem');
     }
 
     yScale() {
         return d3.scaleLinear()
-        .domain([0,2500])
+        .domain([0,6500])
         .range([ this.height, 0]);
     }
 
@@ -39,7 +39,7 @@ class BusiestMonthStackedBarPlot {
 
         this.svg.append("g")
         .attr("transform", "translate(40,0)")
-        .call(d3.axisLeft(y).ticks(5))
+        .call(d3.axisLeft(y).ticks(4))
         .selectAll("text")
         .transition().duration(100)
           .style('fill', 'whitesmoke')

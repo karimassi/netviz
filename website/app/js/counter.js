@@ -10,20 +10,8 @@ class CounterAnimation {
         this.setup();
     }
 
-    initiateCounter() {
-
-        this.svg
-        .append("text")
-        .text(this.finalValue)
-        .attr('class', 'txt')
-        .attr("x", this.x)
-        .attr("y", this.y)
-        .attr('font-size', '50')
-        .style('fill', '#db0000');
-    }
-
     setup() {
-        this.width = 600 ;
+        this.width = 695 ;
         this.height = 100;
         this.x = 10;
         this.y = 10;

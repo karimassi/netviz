@@ -32,7 +32,7 @@ class SankeyMood {
         let MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September', 'October', 'November', 'December'];
 
 
-        var units = "Widgets";
+        var units = "Items";
 
         var formatNumber = d3.format(",.0f");    // zero decimal places
         var format = function(d) { return formatNumber(d) + " " + units; };
