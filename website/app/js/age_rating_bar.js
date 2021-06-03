@@ -13,16 +13,16 @@ class AgeRatingDistributionPlot {
   createInfoTexts(width, xSideGap) {
     this.svg.append('text')
       .attr('x', xSideGap)
-      .attr('fill', 'red')
-      .style('font-size', '2em')
+      .attr('fill', '#DB0000')
+      .style('font-size', '1.6em')
       .style('text-anchor', 'start')
       .style('alignment-baseline', 'hanging')
       .text('Movies');
 
     this.svg.append('text')
       .attr('x', width - xSideGap)
-      .attr('fill', 'red')
-      .style('font-size', '2em')
+      .attr('fill', '#DB0000')
+      .style('font-size', '1.6em')
       .style('text-anchor', 'end')
       .style('alignment-baseline', 'hanging')
       .text('TV Shows');
@@ -105,7 +105,7 @@ class AgeRatingDistributionPlot {
 
     const distanceFromMiddle = this.yAxisWidth / 2;
 
-    this.defaultBarColor = 'red';
+    this.defaultBarColor = '#DB0000';
     this.hoverBarColor = '#800000';
 
     const showBars = values.append('rect')

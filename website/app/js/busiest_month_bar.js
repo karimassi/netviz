@@ -24,7 +24,7 @@ class BusiestMonthStackedBarPlot {
         .selectAll("text")
             .style("text-anchor", "middle")
             .style('fill', 'whitesmoke')
-            .style('font-size', '1rem');
+            .style('font-size', '1.6em');
     }
 
     yScale() {
@@ -42,7 +42,7 @@ class BusiestMonthStackedBarPlot {
         .selectAll("text")
         .transition().duration(100)
           .style('fill', 'whitesmoke')
-          .style('font-size', '0.7rem');
+          .style('font-size', '1.3em');
     }
 
     createColorRange() {
@@ -86,7 +86,7 @@ class BusiestMonthStackedBarPlot {
 
     setup() {
         this.width = 1350 ;
-        this.height = 380;
+        this.height = 350;
         this.svg.attr('viewBox', `0 0 ${this.width} ${this.height}`);
 
         this.initiateBars() ;

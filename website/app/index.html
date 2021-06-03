@@ -39,6 +39,7 @@
           <br>
           <h2>Ever wondered how they became so popular ?</h2>
         </div>
+        <!-- PREFACE -->
         <div class="section">
           <div class="container">
             <div class="section-body">
@@ -70,12 +71,14 @@
                 Think twice before endlessly scrolling down and hoping to find what you’re looking for, Netflix’s catalogue is enormous. 
                 Next thing you know it’ll be time for bed, we warned you! If you’ve ever wondered why there are much more movies than TV shows, 
                 don’t forget the streaming service started out as an online DVD-rental in the United States.
-                <br><br>
                 Chances are you probably do not live there but still can access the platform. That’s because in 2010, they started expanding 
                 their services to different regions of the world. Are all parts of the world watching the same anglophone content? Definitely not. 
               </div>
-              <div style="color: white; text-align: center" id = "busiest-month"></div>
-              <svg id = "busiest-month" height = "500px" width = "100%"></svg>
+              <div style="color: whitesmoke; text-align: center" id = "busiest-month"></div>
+              <div>
+                <svg id = "busiest-month" height = "400px" width = "100%"></svg>
+              </div>
+              </br>
               <div class="row plot-subtitle">
                 <div class="col-md-1 col-3 pl-4 my-auto plot-description" style="text-align: center">
                   <i class="bi bi-info-circle-fill"></i>
@@ -84,7 +87,7 @@
                   Number of movies and TV show releases per month
                 </div>
               </div>
-              <br></br>
+              <br>
               <div class="row">
                 <div class="col-12 col-sm-3 col-vl-3">
                   <div class="animated-counter">
@@ -188,6 +191,7 @@
                 Try to find your favorite movie, and you might learn a thing or two about its actors’ other movies. 
                 Notice how, in most cases, only movies of the same language share actors.
               </div>
+              <br><br>
               <div id="movies-network" class="network"></div>
               <div class="row plot-subtitle">
                 <div class="col-md-1 col-3 pl-4 my-auto plot-description" style="text-align: center">
@@ -249,8 +253,8 @@
                 You seem like you enjoy watching spicy dramas on Tuesdays, and spending summer mornings binge watching 90s sitcoms. 
                 You’re probably not alone. Netflix makes sure to release content adapted to its user’s taste, a taste that definitely changes throughout the year. 
               </div>
-              <svg id = "mood" width = "100%"></svg>
               <br></br>
+              <svg id = "mood" width = "100%"></svg>
             </div>
           </div>
         </div>
@@ -311,19 +315,19 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/plugins/sigma.plugins.animate.min.js"></script>
 
 <!-- Our scripts -->
-<script src="js/media_player_time_selection.js" charset="utf-8"></script>
+<script src="js/subtitle_interactive_timeline.js" charset="utf-8"></script>
 <script src="js/range_selection.js" charset="utf-8"></script>
 
-<script src = "js/counter.js"></script>
+<script src = "js/info_counter.js"></script>
 <script src = "js/world_map.js"></script>
-<script src = "js/network.js"></script>
-<script src = "js/busiest_month.js"></script>
-<script src = "js/language_bplot.js"></script>
+<script src = "js/movies_network.js"></script>
+<script src = "js/busiest_month_bar.js"></script>
+<script src = "js/language_racing.js"></script>
 <script src = "js/button_handler.js"></script>
-<script src = "js/age_rating_distribution_plot.js"></script>
-<script src = "js/topic_wordcloud_plot.js"></script>
+<script src = "js/age_rating_bar.js"></script>
+<script src = "js/keywords_wordcloud.js"></script>
 <script src = "js/sankey.js"></script>
-<script src = "js/mood_sankey.js"></script>
+<script src = "js/genres_sankey.js"></script>
 <!-- <script src = "js/simple-bar-plot.js"></script>
 <script src = "js/exploratory-page.js"></script> -->
 

@@ -129,12 +129,13 @@ class SankeyMood {
             .attr("y", function(d) { return d.dy / 2; })
             .attr("dy", ".35em")
             .attr("text-anchor", "start")
+            .style("font-size", "0.8em")
             .attr("transform", null)
             .text(function(d) { return d.name; })
         .filter(function(d) { return d.x < 550; })
             .attr("x", -10)
             .attr("text-anchor", "end")
-            .style("font-size", "20px");
+            .style("font-size", "0.8em");
 
             // the function for moving the nodes
         function dragmove(d) {

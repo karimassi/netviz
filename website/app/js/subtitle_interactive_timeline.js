@@ -150,7 +150,7 @@ class TimeSelector {
    *    passed as current
    */
   createText(current) {
-    return `${this.getDisplayableValue(current)} / ${this.getDisplayableValue(this.interval[1])}`;
+    return `${this.getDisplayableValue(current)}`;
   }
 
   /**

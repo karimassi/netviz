@@ -21,15 +21,15 @@
 @import "substyles/base";
 
 // Pages
-@import "substyles/counterpage";
+@import "substyles/info_counter";
 @import "substyles/sidebox";
 @import "substyles/timeline";
-@import "substyles/content_for_everybody_page";
+@import "substyles/age_rating_bar";
 @import "substyles/heading_symbols";
-@import "substyles/audio_race";
-@import "substyles/mood";
+@import "substyles/languages_racing";
+@import "substyles/genres_sankey";
 
 // Utils
 @import "substyles/tooltips";
-@import "substyles/media_player_time_selection";
-@import "substyles/plot_description.scss"
+@import "substyles/subtitle_interactive_timeline";
+@import "substyles/plot_description"
