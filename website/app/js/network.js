@@ -19,8 +19,8 @@ class Network {
 				// label: node.name,
 				x: node.x,
 				y: node.y, 
-				size: 0.1,
-				color: "#ff0000"//getHexColor(2**node.audio)
+				size: 1,
+				color: node.color//getHexColor(2**node.audio)
 			})
 		});
 	}
@@ -61,7 +61,3 @@ class Network {
 		})
 	}
 } 
-
-function getHexColor(number){
-	return "#"+((number)>>>0).toString(16).slice(-6);
-}
