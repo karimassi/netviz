@@ -313,23 +313,16 @@
           let data_path = "data/busiest_month.csv";
           instentiateBusiestMonth(svg, data_path) ;
 
-          instantiateCounter(7854,
+          instantiateCounter(20211,
             d3.select('svg#counter-movies').attr('visibility', 'visible'));
 
-          instantiateCounter(5962,
+          instantiateCounter(5641,
             d3.select('svg#counter-shows').attr('visibility', 'visible'));
 
-          instantiateCounter(190,
+          instantiateCounter(100,
             d3.select('svg#counter-countries').attr('visibility', 'visible'));
-          instantiateCounter(68,
+          instantiateCounter(95,
             d3.select('svg#counter-audio').attr('visibility', 'visible'));
-        }
-        if ((destination == 3) && !(languages_loaded)) {
-          languages_loaded = true;
-          let svg = d3.select('svg#most-languages') ;
-          svg.attr('visibility', 'visible');
-          let data_path = "data/racing_audio.csv";
-          instantiateRacingBars(svg, data_path) ;
         }
       },
       afterRender: () => {

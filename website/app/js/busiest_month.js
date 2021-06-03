@@ -22,7 +22,6 @@ class BusiestMonthStackedBarPlot {
         .attr("transform", "translate(0," + this.height + ")")
         .call(d3.axisBottom(x))
         .selectAll("text")
-            //.attr("transform", "translate(-10,0)rotate(-45)")
             .style("text-anchor", "middle")
             .style('fill', 'whitesmoke')
             .style('font-size', '1rem');
@@ -30,7 +29,7 @@ class BusiestMonthStackedBarPlot {
 
     yScale() {
         return d3.scaleLinear()
-        .domain([0,6500])
+        .domain([0,2500])
         .range([ this.height, 0]);
     }
 
