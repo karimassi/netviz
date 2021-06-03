@@ -11,7 +11,7 @@ class CounterAnimation {
     }
 
     setup() {
-        this.width = 600 ;
+        this.width = 695 ;
         this.height = 100;
         this.x = 10;
         this.y = 10;
