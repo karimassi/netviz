@@ -12,7 +12,7 @@ class CounterAnimation {
 
     setup() {
         this.width = 695 ;
-        this.height = 100;
+        this.height = 150;
         this.x = 10;
         this.y = 10;
         this.svg.attr('viewBox', `0  0 ${this.width} ${this.height}`);
