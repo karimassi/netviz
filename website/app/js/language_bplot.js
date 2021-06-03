@@ -243,27 +243,34 @@ class RacingBarsAudio {
     
   }
 
-  updateData(new_data) {
-    console.log(new_data);
-    let dateSlice = new_data.filter(d => d.release_date.getTime() == this.ini_date.getTime())
+  updateData() {
+    let date = this.ini_date.getTime() ;
+    let dateSlice = this.currentData.filter( d => d.release_date.getTime() == date ) 
         .sort((a,b) => d3.ascending(a, b))
         .slice(0,this.top_n);
 
+    const country_counts = {};
+    for(let i = 0; i < this.currentData.length && this.currentData[i].release_date < this.init_date; i++) {
+      country_counts[this.currentData[i].audio] = this.currentData[i].count;
+    }
+    console.log(country_counts);
 
       dateSlice.forEach((d,i) => d.rank = i);
       
       let x = this.xScale().domain([1, d3.max(dateSlice, d => d.count)]); 
         
+      if (dateSlice.length > 0) {
+        this.updateBars(dateSlice) ;
+        this.updateLabels(dateSlice) ;
+        this.updateValueLabels(dateSlice) ;
+      }
       
-      this.updateBars(dateSlice) ;
-      this.updateLabels(dateSlice) ;
-      this.updateValueLabels(dateSlice) ;
 
       //this.datetext.text(d => this.datesValues[this.ini_date]);
       
       //if(this.ini_date == new Date('2021-04-08')) ticker.stop();
       this.ini_date = new Date(this.ini_date.setDate(this.ini_date.getDate() + 1));
-      console.log(this.ini_date);
+      /* console.log(this.ini_date); */
 /*       ++ this.ini_date ;
  */  }
 
@@ -298,7 +305,7 @@ class RacingBarsAudio {
     this.margin = {top: 50, right: 40, bottom: 30, left: 125};
     this.svg.attr('viewBox', `0 0 ${this.width} ${this.height}`);
 
-    this.ini_date = new Date('2015-04-15');
+    this.ini_date = new Date('2015-04-14');
     this.top_n= 10;
 
     this.tickDuration = 200;
@@ -322,8 +329,11 @@ function instantiateRacingBars(svg, data_path) {
   const selector = new TimeSelector(
     'racing-audio-time-selection',
     [new Date('04-14-2015'), new Date('04-08-2020')],
-    date => console.log(date),
-    86400000,
+    function(date) {
+      plot.ini_date = date;
+      plot.updateData();
+    },
+    60000,
     'date', dateFormatter
 
   );
@@ -343,7 +353,7 @@ function instantiateRacingBars(svg, data_path) {
       d.release_date = new Date(d.release_date)
     });
 
-    new_data = data;
+    //new_data = data;
     plot.currentData = data;
 
     //plot.datesValues = d3.map(data, function(d) {return d.release_date}).keys();
@@ -352,18 +362,11 @@ function instantiateRacingBars(svg, data_path) {
     .sort((a,b) =>  d3.ascending(a, b))
     .slice(0, plot.top_n);
 
-    console.log(dateSlice);
     dateSlice.forEach((d,i) => d.rank = i);
 
-    plot.updateData(dateSlice) ;
+    plot.updateData() ;
 
     //plot.ticker();
   });
-
-  $('#content-button').click(() => {
-    const date = parseInt($('#content-year-option').val());
-    console.log(date);
-    plot.updateData(new_data[date]);
-  }) ;
 
 }
