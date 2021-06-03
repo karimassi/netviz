@@ -283,14 +283,14 @@ class TimeSelector {
       .attr('y', -BAR_HEIGHT / 2)
       .attr('height', BAR_HEIGHT)
       .attr('width', 0)
-      .attr('fill', 'red')
+      .attr('fill', '#DB0000')
       .on('mousedown', () => this.handleDragStart());
 
     this.plotHandle = barGroup.append('circle')
       .attr('cx', 0)
       .attr('cy', 0)
       .attr('r', 9)
-      .attr('fill', 'red')
+      .attr('fill', '#DB0000')
       .style('cursor', 'pointer')
       .on('mousedown', () => this.handleDragStart());
 

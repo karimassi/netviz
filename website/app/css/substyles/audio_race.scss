@@ -2,26 +2,14 @@ text{
     font-size: 20px;
     font-family: Open Sans, sans-serif;
 }
-text.title{
-font-size: 24px;
-font-weight: 500;
-}
-text.subTitle{
-    font-size: 24px;
-    font-weight: 500;
 
-    fill: #777777;
-}
-text.caption{
-    font-weight: 400;
-    font-size: 14px;
-    fill: #777777;
-}
 text.label{
-    font-weight: 600;
+    font-size: 1.6em;
+    font-weight: 300;
 }
 
 text.valueLabel{
+    font-size: 1.6em;
     font-weight: 300;
 }
 
@@ -30,6 +18,7 @@ text.dateText{
     font-weight: 700;
     opacity: 0.25;
 }
+
 .tick text {
     fill: #777777;
 }

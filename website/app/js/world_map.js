@@ -23,7 +23,6 @@ function updateCountryPassport(name, info) {
   $("#country-passport").append("<h4>Top 10 genres</h4><br>")
   $("#country-passport").append(`<p>${info.genres.join(', ')}</p><br>`)
 
-
 }
 
 class WorldMapPlot {
@@ -49,7 +48,7 @@ class WorldMapPlot {
       series: {
         regions: [{
           values: total_counts,
-          scale: ['#880000', '#FF0000'],
+          scale: ['#550000', '#D00000'],
           normalizeFunction: 'polynomial',
           legend: {
             horizontal: true,
@@ -59,7 +58,7 @@ class WorldMapPlot {
       },
       regionStyle: {
         initial: {
-          fill: '#444',
+          fill: '#564D4D',
           "fill-opacity": 1,
         },
         hover: {

@@ -47,7 +47,7 @@ class BusiestMonthStackedBarPlot {
 
     createColorRange() {
         return d3.scaleOrdinal()
-                .domain(['Movies', 'Shows'])
+                .domain(['Movies', 'TV Shows'])
                 .range(['#DB0000', '#623A63']);
     }
 
