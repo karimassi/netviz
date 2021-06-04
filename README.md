@@ -20,11 +20,15 @@
 **10% of the final grade**
 
 - [Report](milestones/milestone2.md) (best visualized using Github's markdown preview)
-- The website is available [here](https://com-480-data-visualization.github.io/data-visualization-project-2021-d3-musketeers/). Note: it is a work in progress, and the visualizations do not use real data and are not final. For a better experience, we recommend using Google Chrome to browse it. 
+- The website is available [here](https://com-480-data-visualization.github.io/data-visualization-project-2021-d3-musketeers/). Note: it is a work in progress, and the visualizations do not use real data and are not final. For a better experience, we recommend using Google Chrome to browse it.
 
 ## Milestone 3 (4th June, 5pm)
 
 **80% of the final grade**
+
+- [Process book](milestones/ProcessBook.pdf)
+- [Screencast](https://www.youtube.com/)
+- The website is available [here](https://com-480-data-visualization.github.io/data-visualization-project-2021-d3-musketeers/)
 
 
 ## Late policy
