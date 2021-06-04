@@ -26,9 +26,9 @@
 
 **80% of the final grade**
 
-- [Process book](milestones/ProcessBook.pdf)
-- [Screencast](https://www.youtube.com/)
-- The website is available [here](https://com-480-data-visualization.github.io/data-visualization-project-2021-d3-musketeers/)
+- Our process book is available [here](milestones/ProcessBook.pdf), 
+- Our screencast is available [here](https://youtu.be/-1IZJbK5wSM), 
+- The website is available [here](https://com-480-data-visualization.github.io/data-visualization-project-2021-d3-musketeers/). For a better experience, we recommend using Google Chrome or Edge from a computer to browse it. This ensures a smoother and more enjoyable experience. 
 
 
 ## Late policy
