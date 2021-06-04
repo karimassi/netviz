@@ -1,9 +1,37 @@
 #fullpage > .section {
-  .masks-undericon h2::after {
+  .clap-undericon h2::after {
      content: '\1F3AC';
   }
 
   .magnifier-undericon h2::after {
     content: '\1F50D';
+  }
+
+  .infant-undericon h2::after {
+    content: '\1F46A';
+  }
+
+  .calendar-undericon h2::after {
+    content: '\1f4c6';
+  }
+
+  .clock-undericon h2::after {
+    content: '\1F553';
+  }
+
+  .pencil-undericon h2::after {
+    content: '\1f58a';
+  }
+
+  .mask-undericon h2::after {
+    content: '\1F3AD';
+  }
+
+  .globe-undericon h2::after {
+    content: '\1F30D';
+  }
+
+  .languages-undericon h2::after {
+      content: '\1F5E8';
   }
 }
