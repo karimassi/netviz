@@ -39,8 +39,8 @@ h2 {
       text-transform: uppercase;
       display: inline-block;
       position: relative;
-      border-bottom: 10px double whitesmoke;
-      padding-bottom: 5px;
+      border-bottom: 3px solid whitesmoke;
+      padding-bottom: 10px;
       &::after {
         font-family: 'Glyphicons Halflings';
         // font-family: monospace;
@@ -105,11 +105,13 @@ h2 {
   position: absolute;
   margin-top: 20px;
   left: 50%;
-  width: 200px;
-  margin-left: -100px;
+  width: 100px;
+  margin-left: -50px;
   display:block;
   color: whitesmoke;
   text-align: center;
-  font-size: 7em;
+  // padding: 0 auto;
+  font-size: 4em;
+  // background: green;
   content: '\1F37F';
 }
