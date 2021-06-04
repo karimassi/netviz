@@ -25,14 +25,26 @@ class Network {
 	}
 
 	process_nodes(nodes) {
+		var audio_to_color = {
+			'English': "#DB0000",
+			'Japanese': "#CE060B", 
+			'Hindi': "#623A63",
+			'French': "#B31321",
+			'Korean': "#A51A2C",
+			'Italian': "#6F3458",
+			'German': "#8A2742", 
+			'Spanish': "#7D2D4D",
+			'Mandarin': "#982037", 
+			'Arabic': "#C00D16",
+		}
 		nodes.forEach(node => {
 			self.nodes.push({
 				id: node.id, 
-				label: node.name,
+				label: `${node.name} (${node.audio})`,
 				x: node.x,
 				y: node.y, 
 				size: 8,
-				color: node.color//getHexColor(2**node.audio)
+				color: audio_to_color[node.audio]
 			})
 		});
 	}
@@ -73,7 +85,7 @@ class Network {
 		})
 
 		s.configNoverlap({
-			nodeMargin: 0.5,
+			nodeMargin: 0.8,
 			scaleNodes: 0.85,
 			gridSize: 100,
 			easing: 'quadraticInOut', // animation transition function
