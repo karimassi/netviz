@@ -10,9 +10,9 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="css/jquery-jvectormap-2.0.5.css"/>
+    <link rel="stylesheet" href="css/jquery-jvectormap-2.0.5.css">
 
-    <link rel="stylesheet" href="css/master.css"/>
+    <link rel="stylesheet" href="css/master.css">
   </head>
 
 <body>
@@ -57,38 +57,25 @@
             </div>
           </div>
         </div>
-        <!-- INTRODUCTION -->
+        <!-- COUTNER -->
         <div class="section">
           <div class="container">
-            <div class="section-heading">
-              <h2>Busiest month</h2>
+              <div class="section-heading sofa-undericon">
+              <h2>Who's watching ?</h2>
             </div>
             <div class="section-body">
               <div class="left-justified-text" style="max-width: 1000px; margin: 10px auto;">
-                You probably know Netflix plans their releases way ahead, and that’s no secret.
-                What you might not know, however, is that there are months during which they tend to release more, or less content than usual.
+                Think twice before endlessly scrolling down and hoping to find what you’re looking for, Netflix’s catalogue is enormous. 
+                Next thing you know it’ll be time for bed, we warned you!
                 <br><br>
-                Think twice before endlessly scrolling down and hoping to find what you’re looking for, Netflix’s catalogue is enormous.
-                Next thing you know it’ll be time for bed, we warned you! If you’ve ever wondered why there are much more movies than TV shows,
+                If you’ve ever wondered why there are much more movies than TV shows, 
                 don’t forget the streaming service started out as an online DVD-rental in the United States.
-                Chances are you probably do not live there but still can access the platform. That’s because in 2010, they started expanding
-                their services to different regions of the world. Are all parts of the world watching the same anglophone content? Definitely not.
+                <br><br>
+                Chances are you probably do not live there but still can access the platform. That’s because in 2010, they started expanding 
+                their services to different regions of the world. Are all parts of the world watching the same anglophone content? Definitely not. 
               </div>
-              <div style="color: whitesmoke; text-align: center" id = "busiest-month"></div>
-              <div>
-                <svg id = "busiest-month" height = "400px" width = "100%"></svg>
-              </div>
-              </br>
-              <div class="row plot-subtitle">
-                <div class="col-md-1 col-3 pl-4 my-auto plot-description" style="text-align: center">
-                  <i class="bi bi-info-circle-fill"></i>
-                </div>
-                <div class="col-9 my-auto plot-description">
-                  Number of movies and TV show releases per month
-                </div>
-              </div>
-              <br>
-              <div class="row">
+              <br><br>
+              <div class="row pt-5">
                 <div class="col-12 col-sm-3 col-vl-3">
                   <div class="animated-counter">
                     <h4>Movies</h4>
@@ -98,7 +85,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-3 col-vl-3">
+                <div class="col-12 col-lg-3 col-sm-6 col-vl-3">
                   <div class="animated-counter">
                     <h4>TV shows</h4>
                     <div class="counter-data pt-1">
@@ -107,7 +94,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-3 col-vl-3">
+                <div class="col-12 col-lg-3 col-sm-6 col-vl-3">
                   <div class="animated-counter">
                     <h4>Countries</h4>
                     <div class="counter-data pt-1">
@@ -116,7 +103,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-3 col-vl-3">
+                <div class="col-12 col-lg-3 col-sm-6 col-vl-3">
                   <div class="animated-counter">
                     <h4>Languages</h4>
                     <div class="counter-data pt-1">
@@ -129,11 +116,39 @@
             </div>
           </div>
         </div>
+        <!-- BUSIEST MONTH -->
+        <div class="section">
+          <div class="container">
+            <div class="section-heading calendar-undericon">
+              <h2>Monthly trends</h2>
+            </div>
+            <div class="section-body">
+              <div class="center-justified-text" style="max-width: 1000px; margin: 10px auto;">
+                You probably know Netflix plans their releases way ahead, and that’s no secret. 
+                What you might not know, however, is that there are months during which they tend to release more, or less content than usual. 
+              </div>
+              <br><br>
+              <div style="color: whitesmoke; text-align: center" id = "busiest-month"></div>
+              <div>
+                <svg id = "busiest-month" height = "450px" width = "100%"></svg>
+              </div>
+              </br>
+              <div class="row plot-subtitle">
+                <div class="col-md-1 col-3 pl-4 my-auto plot-description" style="text-align: center">
+                  <i class="bi bi-info-circle-fill"></i>
+                </div>
+                <div class="col-9 my-auto plot-description">
+                  Number of movies and TV show releases per month
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- LANGUAGES -->
         <div class="section">
           <div class="container">
-            <div class="section-heading">
-              <h2>Most presented languages</h2>
+            <div class="section-heading languages-undericon">
+              <h2>Cultural expansion</h2>
             </div>
             <div class="section-body">
               <div class="center-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -141,6 +156,7 @@
                 Sit back, press play and watch the content’s languages participate in a (quite unfair) race.
                 While English is far ahead, notice how some languages lose in popularity.
               </div>
+              <br>
               <div id ='most-languages'></div>
               <svg id = "most-languages" height = "500px" width = "100%"></svg>
               <div id="racing-audio-time-selection" plot-description="Most represented languages over the years"></div>
@@ -150,8 +166,8 @@
         <!-- WORLDWIDE -->
         <div class="section">
           <div class="container">
-            <div class="section-heading">
-              <h2>Available worldwide</h2>
+            <div class="section-heading globe-undericon">
+              <h2>International expansion</h2>
             </div>
             <div class="section-body">
               <div class="center-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -179,8 +195,8 @@
         <!-- NETWORK -->
         <div class="section">
           <div class="container">
-            <div class="section-heading">
-              <h2>Interconnected</h2>
+            <div class="section-heading mask-undericon">
+              <h2>Multicultural Web</h2>
             </div>
             <div clas="section-body">
               <div class="left-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -198,7 +214,7 @@
                   <i class="bi bi-info-circle-fill"></i>
                 </div>
                 <div class="col-9 my-auto plot-description">
-                  Network of movie co-occurences, according to actors. Select a movie to start!
+                  Network of movie co-occurences according to actors, colored by original language. <br>Select a movie to start! Click outside the graph to deselect.
                 </div>
               </div>
             </div>
@@ -208,8 +224,8 @@
         <!-- TOPICS WORDCLOUD -->
         <div class="section">
           <div class="container">
-            <div class="section-heading">
-              <h2>WORDS AS A TOOL</h2>
+            <div class="section-heading pencil-undericon">
+              <h2>Words as a Tool</h2>
             </div>
             <div class="section-body">
               <div class="center-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -227,8 +243,8 @@
         <!-- AGE -->
         <div class="section" id="content-for-everybody-page">
           <div class="container">
-            <div class="section-heading abc">
-              <h2>CONTENT FOR EVERYBODY</h2>
+            <div class="section-heading infant-undericon">
+              <h2>Family Friendliness</h2>
             </div>
             <div class="section-body">
               <div class="center-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -245,8 +261,8 @@
         <!-- GENRES -->
          <div class="section">
           <div class="container">
-            <div class="section-heading">
-              <h2>For any mood at any time</h2>
+            <div class="section-heading clock-undericon">
+              <h2>Endless Content</h2>
             </div>
             <div class="section-body">
               <div class="center-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -255,14 +271,25 @@
               </div>
               <br></br>
               <svg id = "mood" width = "100%"></svg>
+              <div class="row plot-subtitle">
+                <div class="col-md-1 col-3 pl-4 my-auto plot-description" style="text-align: center">
+                  <i class="bi bi-info-circle-fill"></i>
+                </div>
+                <div class="col-9 my-auto plot-description">
+                  Repartitions of items released per genres across all months. Hover on a line to get started!
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
+        <!-- Still Watching -->
+        <div class="section">
+          <h2>Are you still watching ?</h2>
+        </div>
         <div class="section" id="exploratory-tool-page">
           <div class="container">
-            <div class="section-heading">
-              <h2>Exploratory tool</h2>
+            <div class="section-heading magnifier-undericon">
+              <h2>Hungry for more ?</h2>
             </div>
             <div class="section-body">
               <div class="row">
@@ -349,20 +376,24 @@
 
 <script>
   $(function () {
-    var pages = [
-      "Home",
-      "Preface",
-      "Introduction",
-      "Languages",
-      "Worldwide",
-      "Interconnected",
-      "Topics",
-      "Age",
-      "Genres",
-      "Exploratory Tool"
-    ];
-    var intro_loaded = false;
-    var languages_loaded = false;
+    // var pages = [
+    //   "Home",
+    //   "Preface",
+    //   "Introduction",
+    //   "Months",
+    //   "Languages",
+    //   "Worldwide",
+    //   "Interconnected",
+    //   "Topics",
+    //   "Age",
+    //   "Genres",
+    //   "Still watching ?",
+    //   "Exploratory Tool"
+    // ];
+    var pages = new Array(12).fill("");
+    var counter_loaded = false;
+    var months_loaded = false;
+
 
     $("#fullpage").fullpage({
       navigation: true,
@@ -379,13 +410,8 @@
         return '#000000';
       }),
       afterLoad : function(origin, destination, direction) {
-        if ((destination == 3) && !(intro_loaded)) {
-          intro_loaded = true;
-          let svg = d3.select('svg#busiest-month') ;
-          svg.attr('visibility', 'visible');
-          let data_path = "data/busiest_month.csv";
-          instentiateBusiestMonth(svg, data_path) ;
-
+        if ((destination == 3) && !(counter_loaded)) {
+          counter_loaded = true;
           instantiateCounter(20211,
             d3.select('svg#counter-movies').attr('visibility', 'visible'));
 
@@ -396,6 +422,13 @@
             d3.select('svg#counter-countries').attr('visibility', 'visible'));
           instantiateCounter(95,
             d3.select('svg#counter-audio').attr('visibility', 'visible'));
+        }
+        if ((destination == 4) && !(months_loaded)) {
+          months_loaded = true;
+          let svg = d3.select('svg#busiest-month') ;
+          svg.attr('visibility', 'visible');
+          let data_path = "data/busiest_month.csv";
+          instentiateBusiestMonth(svg, data_path) ;
         }
       },
       afterRender: () => {

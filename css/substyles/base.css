@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body {
   overflow: hidden; }
 
@@ -35,19 +34,20 @@ h2 {
     text-transform: uppercase;
     display: inline-block;
     position: relative;
-    border-bottom: 10px double whitesmoke;
-    padding-bottom: 5px; }
+    border-bottom: 3px solid whitesmoke;
+    padding-bottom: 10px; }
     #fullpage > .section .section-heading h2::after {
       font-family: 'Glyphicons Halflings';
-      content: "ℵ";
+      content: "\e003";
       color: whitesmoke;
+      text-align: center;
       background-color: #000000;
       position: absolute;
       padding: 0 3px;
       font-size: 0.7em;
-      width: 30px;
+      width: 35px;
       left: calc(50% - 15px);
-      top: 33px; }
+      top: 36px; }
 
 #fullpage > .section .section-body {
   text-align: center;
@@ -76,6 +76,9 @@ h2 {
   margin-left: auto;
   margin-right: auto; }
 
+.animated-counter {
+  margin: 10px 0; }
+
 #preface {
   position: relative; }
 
@@ -83,12 +86,12 @@ h2 {
   position: absolute;
   margin-top: 20px;
   left: 50%;
-  width: 200px;
-  margin-left: -100px;
+  width: 100px;
+  margin-left: -50px;
   display: block;
   color: whitesmoke;
   text-align: center;
-  font-size: 7em;
+  font-size: 4em;
   content: '\1F37F'; }
 
 /*# sourceMappingURL=base.css.map */
