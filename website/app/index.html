@@ -60,14 +60,15 @@
         <!-- COUTNER -->
         <div class="section">
           <div class="container">
-              <div class="section-heading">
-              <h2>Introduction</h2>
+              <div class="section-heading sofa-undericon">
+              <h2>Who's watching ?</h2>
             </div>
             <div class="section-body">
               <div class="left-justified-text" style="max-width: 1000px; margin: 10px auto;">
                 Think twice before endlessly scrolling down and hoping to find what you’re looking for, Netflix’s catalogue is enormous. 
+                Next thing you know it’ll be time for bed, we warned you!
                 <br><br>
-                Next thing you know it’ll be time for bed, we warned you! If you’ve ever wondered why there are much more movies than TV shows, 
+                If you’ve ever wondered why there are much more movies than TV shows, 
                 don’t forget the streaming service started out as an online DVD-rental in the United States.
                 <br><br>
                 Chances are you probably do not live there but still can access the platform. That’s because in 2010, they started expanding 
@@ -119,7 +120,7 @@
         <div class="section">
           <div class="container">
             <div class="section-heading calendar-undericon">
-              <h2>Busiest month</h2>
+              <h2>Monthly trends</h2>
             </div>
             <div class="section-body">
               <div class="center-justified-text" style="max-width: 1000px; margin: 10px auto;">
@@ -147,7 +148,7 @@
         <div class="section">
           <div class="container">
             <div class="section-heading languages-undericon">
-              <h2>Most presented languages</h2>
+              <h2>Cultural expansion</h2>
             </div>
             <div class="section-body">
               <div class="center-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -155,6 +156,7 @@
                 Sit back, press play and watch the content’s languages participate in a (quite unfair) race.
                 While English is far ahead, notice how some languages lose in popularity.
               </div>
+              <br>
               <div id ='most-languages'></div>
               <svg id = "most-languages" height = "500px" width = "100%"></svg>
               <div id="racing-audio-time-selection" plot-description="Most represented languages over the years"></div>
@@ -165,7 +167,7 @@
         <div class="section">
           <div class="container">
             <div class="section-heading globe-undericon">
-              <h2>Available worldwide</h2>
+              <h2>International expansion</h2>
             </div>
             <div class="section-body">
               <div class="center-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -194,7 +196,7 @@
         <div class="section">
           <div class="container">
             <div class="section-heading mask-undericon">
-              <h2>Interconnected</h2>
+              <h2>Multicultural Web</h2>
             </div>
             <div clas="section-body">
               <div class="left-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -212,7 +214,7 @@
                   <i class="bi bi-info-circle-fill"></i>
                 </div>
                 <div class="col-9 my-auto plot-description">
-                  Network of movie co-occurences, according to actors. <br>Select a movie to start! Click outside the graph to deselect.
+                  Network of movie co-occurences according to actors, colored by original language. <br>Select a movie to start! Click outside the graph to deselect.
                 </div>
               </div>
             </div>
@@ -223,7 +225,7 @@
         <div class="section">
           <div class="container">
             <div class="section-heading pencil-undericon">
-              <h2>WORDS AS A TOOL</h2>
+              <h2>Words as a Tool</h2>
             </div>
             <div class="section-body">
               <div class="center-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -242,7 +244,7 @@
         <div class="section" id="content-for-everybody-page">
           <div class="container">
             <div class="section-heading infant-undericon">
-              <h2>CONTENT FOR EVERYBODY</h2>
+              <h2>Family Friendliness</h2>
             </div>
             <div class="section-body">
               <div class="center-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -260,7 +262,7 @@
          <div class="section">
           <div class="container">
             <div class="section-heading clock-undericon">
-              <h2>For any mood at any time</h2>
+              <h2>Endless Content</h2>
             </div>
             <div class="section-body">
               <div class="center-justified-text" style="max-width: 800px; margin: 10px auto;">
@@ -280,11 +282,14 @@
             </div>
           </div>
         </div>
-
+        <!-- Still Watching -->
+        <div class="section">
+          <h2>Are you still watching ?</h2>
+        </div>
         <div class="section" id="exploratory-tool-page">
           <div class="container">
             <div class="section-heading magnifier-undericon">
-              <h2>Exploratory tool</h2>
+              <h2>Hungry for more ?</h2>
             </div>
             <div class="section-body">
               <div class="row">
@@ -371,19 +376,21 @@
 
 <script>
   $(function () {
-    var pages = [
-      "Home",
-      "Preface",
-      "Introduction",
-      "Months",
-      "Languages",
-      "Worldwide",
-      "Interconnected",
-      "Topics",
-      "Age",
-      "Genres",
-      "Exploratory Tool"
-    ];
+    // var pages = [
+    //   "Home",
+    //   "Preface",
+    //   "Introduction",
+    //   "Months",
+    //   "Languages",
+    //   "Worldwide",
+    //   "Interconnected",
+    //   "Topics",
+    //   "Age",
+    //   "Genres",
+    //   "Still watching ?",
+    //   "Exploratory Tool"
+    // ];
+    var pages = new Array(12).fill("");
     var counter_loaded = false;
     var months_loaded = false;
 

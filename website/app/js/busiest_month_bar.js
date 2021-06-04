@@ -169,7 +169,7 @@ function instentiateBusiestMonth(svg,data_path) {
     function showInitialPlot() {
         svg.style('opacity', 0);
         svg.transition()
-            .delay(1000)
+            .delay(10)
             .duration(600)
             .style('opacity', 1);
     }
