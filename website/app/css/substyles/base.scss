@@ -43,15 +43,17 @@ h2 {
       padding-bottom: 5px;
       &::after {
         font-family: 'Glyphicons Halflings';
-        content: "ℵ";
+        // font-family: monospace;
+        content: "\e003";
         color: whitesmoke;
+        text-align: center;
         background-color: #000000;
         position: absolute;
         padding: 0 3px;
         font-size: 0.7em;
-        width: 30px;
+        width: 35px;
         left: calc(50% - 15px);
-        top: 33px;
+        top: 36px;
       }
     }
   }
@@ -89,6 +91,10 @@ h2 {
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.animated-counter {
+  margin: 10px 0;
 }
 
 #preface {
