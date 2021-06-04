@@ -37,7 +37,7 @@ class SankeyMood {
         var formatNumber = d3.format(",.0f");    // zero decimal places
         var format = function(d) { return formatNumber(d) + " " + units; };
 
-        
+
         var sankey = d3.sankey()
         .nodeWidth(20)
         .nodePadding(10)
@@ -92,7 +92,7 @@ class SankeyMood {
         // add the link titles
         link.append("title")
             .text(function(d) {
-                return d.source.name + " → " + 
+                return d.source.name + " → " +
                     d.target.name + "\n" + format(d.value); });
 
         // add in the nodes
@@ -100,7 +100,7 @@ class SankeyMood {
             .data(graph.nodes)
             .enter().append("g")
             .attr("class", "node")
-            .attr("transform", function(d) { 
+            .attr("transform", function(d) {
                 return "translate(" + d.x + "," + d.y + ")"; })
             .call(d3.drag()
             .subject(function(d) {
@@ -115,12 +115,12 @@ class SankeyMood {
         node.append("rect")
             .attr("height", function(d) {return d.dy; })
             .attr("width", sankey.nodeWidth())
-            .style("fill", function(d) { 
+            .style("fill", function(d) {
                 return d.color = "#db0000"; })
-            .style("stroke", function(d) { 
+            .style("stroke", function(d) {
                 return d3.rgb(d.color).darker(2); })
         .append("title")
-            .text(function(d) { 
+            .text(function(d) {
                 return d.name + "\n" + format(d.value); });
 
         // add in the title for the nodes
@@ -137,24 +137,24 @@ class SankeyMood {
             .attr("text-anchor", "end")
             .style("font-size", "0.8em");
 
-            // the function for moving the nodes
+        // the function for moving the nodes
         function dragmove(d) {
             d3.select(this)
-                .attr("transform", 
-                    "translate(" 
-                        + d.x + "," 
+                .attr("transform",
+                    "translate("
+                        + d.x + ","
                         + (d.y = Math.max(
                             0, Math.min(sizeY - d.dy, d3.event.y))
                         ) + ")");
             sankey.relayout();
             link.attr("d", path);
-        } 
+        }
     }
 }
 
 function instantiateMoodSankey(svg, data_path) {
     let plot = new SankeyMood(svg);
-    
+
     function showInitialPlot() {
         svg.style('opacity', 0);
         svg.transition()
@@ -168,7 +168,7 @@ function instantiateMoodSankey(svg, data_path) {
         plot.createSankey();
     });
 
-    
+
 
 }
 

@@ -39,8 +39,8 @@ class CounterAnimation {
             .tween("textTween", function(d) {
                 var i = d3.interpolate(this.textContent, d);
                 return function(t) {
-                // t is the percent completion of the transition
-                this.textContent = Math.round(i(t));
+                  // t is the percent completion of the transition
+                  this.textContent = Math.round(i(t));
                 }
             });
     }

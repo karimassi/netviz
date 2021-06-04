@@ -7,7 +7,6 @@ class RacingBarsAudio {
     this.svg = svgElement;
     this.currentData = {};
     this.datetext = {};
-    //this.datesValues = {};
     this.width = 0;
     this.height = 0;
     this.margin = {};

@@ -1,3 +1,6 @@
+/**
+ * Element wise array equality check
+ */
 function arrayEquals(a, b) {
   return Array.isArray(a) &&
     Array.isArray(b) &&
@@ -17,6 +20,11 @@ class SimpleBarPlot {
     this.setup(width, height, initialLabels, barWidth);
   }
 
+  /**
+   * Updates the text of the labels under the bars to the given values.
+   *  It is assumed that the number of passed labels is equal to the number of
+   *  texts that hold them.
+   */
   updateLabels(labels) {
     if(!this.initialized || arrayEquals(this.labels, labels)) {
       return;
@@ -39,6 +47,11 @@ class SimpleBarPlot {
     this.labels = labels;
   }
 
+  /**
+   * Updates the size of the bars and the values of the labels indicating the size of the
+   *  bars to match the given data. It is assumed that the number of passed data instances
+   *  is equal to the number of bars.
+   */
   updateData(data) {
     if(!this.initialized) {
       return;
@@ -77,6 +90,9 @@ class SimpleBarPlot {
     }
   }
 
+  /**
+   * Creates GUI elements of the plot
+   */
   setup(width, height, labels, barWidth) {
     const hMargin = 50;
     const [sizeX, sizeY] = [width, height];

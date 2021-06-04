@@ -16,6 +16,9 @@ class RangeSelector {
   }
 
 
+  /**
+   * Changes the size and position of the selection rectangle (the red one)
+   */
   updateSelectionRect() {
     const x = Math.min(
       this.selectionTools.left.line.attr('x1'),
@@ -30,10 +33,18 @@ class RangeSelector {
       .attr('width', width);
   }
 
+  /**
+   * Gets the position of a side based on the position of its respective
+   *  selecton line.
+   */
   getPosition(side) {
     return parseFloat(this.selectionTools[side].line.attr('x1'));
   }
 
+  /**
+   * Converts the position of selection tools to dates and calls the callback
+   *  with these dates as parameters
+   */
   emitPosition() {
     // For some reason d3 is messing up with the same reference, so the result
     //  has to be cloned...
@@ -45,6 +56,11 @@ class RangeSelector {
     this.callback(lowerBound, upperBound);
   }
 
+  /**
+   * Moves the selection tool of this side to the specified position, while
+   *  also keeping the minimum specified distance from the other side if
+   *  specified
+   */
   moveSelectionTool(side, percentage, minDistanceCheck=false) {
     percentage = Math.max(0, Math.min(1, percentage));
 
@@ -90,7 +106,10 @@ class RangeSelector {
     this.updateSelectionRect();
   }
 
-
+  /**
+   * Callback when mouse is pressed on SVG element. It checks if the selector is
+   *  close and activates selection of that side if that's the case
+   */
   handleMouseDown() {
     const [mouseX, mouseY] = d3.mouse(this.plot.node());
 
@@ -111,6 +130,10 @@ class RangeSelector {
     }
   }
 
+  /**
+   * Callback when mouse is moved. If the selection is active, the selection
+   *  tools for the side for which selection is active will be moved
+   */
   handleMouseMove() {
     if(this.draggedSide !== undefined) {
       const [mouseX, _] = d3.mouse(this.plot.node());
@@ -120,6 +143,10 @@ class RangeSelector {
     }
   }
 
+  /**
+   * Callback for the release of mouse click in SVG element. If the selection
+   *  was active, emits the value and deactivates selection.
+   */
   handleMouseUp() {
     if(this.draggedSide !== undefined) {
       this.draggedSide = undefined;
@@ -127,6 +154,9 @@ class RangeSelector {
     }
   }
 
+  /**
+   * Creates GUI elements of the plot and sets the proper callbacks.
+   */
   createPlot(width, heihgt, marginX) {
     this.points.sort((a, b) => a.month - b.month);
 
@@ -285,6 +315,9 @@ class RangeSelector {
     this.emitPosition();
   }
 
+  /**
+   * Sets the size of the SVG and initiates GUI creation procedure
+   */
   setup() {
     const [sizeX, sizeY] = [500, 65];
     const [marginX] = [30];

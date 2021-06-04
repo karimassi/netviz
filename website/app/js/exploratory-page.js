@@ -79,6 +79,9 @@ class ExploratoryTool {
     this.startLoadingMappings(countriesPath);
   }
 
+  /**
+   * Gets top audios and updates data and audio of the bar plot with it.
+   */
   fillAudioPlot(data) {
     this.fillAudioWithNonAppearing(data);
     const topAudio = Object.entries(data).sort((a, b) => b[1] - a[1])
@@ -89,12 +92,20 @@ class ExploratoryTool {
     this.audioBarPlot.updateLabels(labels);
   }
 
+  /**
+   * Displays message that data is missing and resets the audio plot.
+   */
   handleNoData() {
     this.sideBar.html('No data available');
     this.statisticsBar.html('No data available');
     this.fillAudioPlot({});
   }
 
+  /**
+   * Adds some audios with count 0 if they are missing. Used to ensure that
+   *  there is at least predefined number of audios, so the visualisation
+   *  doesn't have to handle the missing data.
+   */
   fillAudioWithNonAppearing(data) {
     const sampleLanguages = [
       'English', 'Hindi', 'Spanish', 'Japanese', 'Italian', 'Korean', 'Mandarin'
@@ -106,15 +117,15 @@ class ExploratoryTool {
     }
   }
 
+  /**
+   * Displays the given data in the predefined way in the bar plot and the side boxes
+   */
   displayData(data) {
-    // this.fillAudioWithNonAppearing(data['audioCount']);
-
     if(data['audioCount'] === undefined) {
       data['audioCount'] = {};
     }
     this.fillAudioPlot(data['audioCount']);
 
-    // this.showMovieBarPlot.updateData(data['numberOfTitles']);
     this.sideBar.html(`
       Top movies:
       <ol>
@@ -142,6 +153,11 @@ class ExploratoryTool {
     `)
   }
 
+  /**
+   * Starts aggregation and on it's end displays data appropriately. If there
+   *  is no appropriate data, it invokes the function to display info that
+   *  data is missing.
+   */
   updateData() {
     if(this.exploratoryData !== undefined &&
         this.selected.country !== undefined &&
@@ -174,6 +190,10 @@ class ExploratoryTool {
     }
   }
 
+  /**
+   * A reduction function that count the number of occurences of each value of
+   *   attribute audio
+   */
   countAudio(agg, title) {
     if(agg === undefined) {
       agg = {};
@@ -188,6 +208,11 @@ class ExploratoryTool {
     return agg;
   }
 
+  /**
+   * A reduction function that counts the total sum of the given attribute and the
+   *   number of items that has it and returns result as a two element array
+   *   ([the sum, the count])
+   */
   attrAverageDataReducer(attrName) {
     return (agg, title) => {
       if(agg === undefined) {
@@ -202,6 +227,10 @@ class ExploratoryTool {
     }
   }
 
+  /**
+   * A reduction function that counts number of movies and TV shows
+   *  and the result is two element array (movie and TV show count respectively)
+   */
   countMoviesShows(agg, title) {
     if(agg === undefined) {
       agg = [0, 0];
@@ -215,6 +244,10 @@ class ExploratoryTool {
     return agg;
   }
 
+  /**
+   *  Returns a reduction function that reduces movies by keeping only k
+   *    top rated according to metacritic.
+   */
   topMoviesReducer(k) {
     return (agg, title) => {
       if(agg === undefined) {
@@ -227,6 +260,10 @@ class ExploratoryTool {
     }
   }
 
+  /**
+   *  Returns a reduction function that reduces shows by keeping only k
+   *    top rated according to metacritic.
+   */
   topShowsReducer(k) {
     return (agg, title) => {
       if(agg === undefined) {
@@ -283,6 +320,9 @@ class ExploratoryTool {
     });
   }
 
+  /**
+   * Initializes plots that will show aggregated data
+   */
   preparePlots(audioPlotId) {
     this.audioBarPlot = new SimpleBarPlot(
       audioPlotId,

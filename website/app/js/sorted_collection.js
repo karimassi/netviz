@@ -1,8 +1,15 @@
+/**
+ * Returns the last element of the given array. Assumes that the length is > 0
+ */
 Array.prototype.last = function() {
   return this[this.length - 1];
 };
 
 class SortedCollection {
+  /**
+   * Collection that keeps an array of the given size, such that all values
+   *  are at all time sorted according to the ordering specified by comparator
+   */
   constructor(size, comparator) {
     this.arr = new Array(size).fill(undefined);
     this.effectiveSize = 0;
@@ -11,6 +18,10 @@ class SortedCollection {
     this.lastIndex = this.arr.length - 1;
   }
 
+  /**
+   * Inserts the value in the index of the array where it should fit, possibly
+   *  moving other elements around in the process 
+   */
   tryToInsert(value) {
     if(this.last === undefined || this.comparator(value, this.last)) {
       let i;

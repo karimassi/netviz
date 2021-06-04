@@ -101,7 +101,7 @@ class BusiestMonthStackedBarPlot {
 
         var transition = d3.transition().duration(2000);
 
-        var x = this.xScale(); 
+        var x = this.xScale();
         var y = this.yScale();
 
         this.createXaxis();
@@ -154,10 +154,9 @@ class BusiestMonthStackedBarPlot {
             .transition(transition)
             .attr("y", function(d) { return y(d[1]); })
             .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-            //.delay(function(d,i) {return i*200})
-        
+
     }
-    }
+}
 
 
 function instentiateBusiestMonth(svg,data_path) {
@@ -177,7 +176,7 @@ function instentiateBusiestMonth(svg,data_path) {
     d3.csv(data_path).then(data => {
         loadedData = data;
         loadedData.forEach(d=> d.total = parseInt(d.movie)+parseInt(d.show));
-        
+
         showInitialPlot();
         plot.currentData = loadedData;
         plot.MONTHS = d3.map(loadedData, function(d){return(d.month)}).keys();
