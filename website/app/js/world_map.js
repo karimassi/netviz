@@ -7,6 +7,12 @@ $(function() {
   });
 })
 
+/**
+ * Updates the sidebar next to the world map 
+ * @param {string} name The selected country name
+ * @param {Object} info The country's data 
+ * @returns 
+ */
 function updateCountryPassport(name, info) {
   $("#country-passport").empty()
   $("#country-passport").append(`<h2>${name}</h2><br>`)
@@ -25,14 +31,24 @@ function updateCountryPassport(name, info) {
 
 }
 
+/**
+ * Construct a world map using the miller projection
+ * and draw it in the container with the provided id 
+ */
 class WorldMapPlot {
-  constructor(id, args) {
+  constructor(id) {
     this.id = id;
-    this.args = args;
   }
 
+  /**
+   * Draws the given data on a map and calls the given callback
+   * when a region is selected
+   * @param {Object} data Data corresponding to countries 
+   * @param {Function} callback Callback to call when selecting a region
+   */
   draw(data, callback) {
 
+    // Compute total country counts to color map
     let total_counts = {};
     for (var key in data) {
       total_counts[key] = data[key].count_movies + data[key].count_series;
@@ -76,6 +92,8 @@ class WorldMapPlot {
       zoomMax: 8, 
       zoomMin: 1, 
       zoomStep: 1.6,
+      // When selecting a region call the provided callback
+      // with the selected region
       onRegionSelected: ((event, code, isSelected) => {
         if (isSelected) {
           let map=$(this.id).vectorMap('get', 'mapObject');

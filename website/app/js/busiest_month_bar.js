@@ -94,7 +94,6 @@ class BusiestMonthStackedBarPlot {
 
     updateData() {
 
-        //this.currentData.forEach(d=> d.total = parseInt(d.movie)+parseInt(d.show));
         var stackedData = this.createStackedData();
         var types = this.currentData.columns.slice(1);
         var color = this.createColorRange();
@@ -153,8 +152,13 @@ class BusiestMonthStackedBarPlot {
             .on("mouseleave", mouseleave)
             .transition(transition)
             .attr("y", function(d) { return y(d[1]); })
+<<<<<<< HEAD
             .attr("height", function(d) { return y(d[0]) - y(d[1]); })
 
+=======
+            .attr("height", function(d) { return y(d[0]) - y(d[1]); })        
+    }
+>>>>>>> b59de7c2f9be3347f340f3450276209f5e8d5169
     }
 }
 

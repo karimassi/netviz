@@ -5,6 +5,9 @@ $(function() {
 	});
 })
 
+/**
+ * Builds a network plot in the given container id
+ */
 class Network {
 	constructor(container) {
 		self.container = container;
@@ -24,6 +27,7 @@ class Network {
 		  });
 	}
 
+	// Processes node data 
 	process_nodes(nodes) {
 		var audio_to_color = {
 			'English': "#DB0000",
@@ -49,6 +53,7 @@ class Network {
 		});
 	}
 
+	// Processes edge data
 	process_edges(edges) {
 		edges.forEach(edge => {
 			self.edges.push({
@@ -65,7 +70,7 @@ class Network {
 		this.process_nodes(data.nodes);
 		this.process_edges(data.edges);
 		let g = {nodes: self.nodes, edges: self.edges};
-
+		// Build initial graph
 		let s = new sigma({
 			autoRescale : false,
 			graph: g,
@@ -84,6 +89,7 @@ class Network {
 			}
 		})
 
+		// Plugin to avoid nodes overlapping 
 		s.configNoverlap({
 			nodeMargin: 0.8,
 			scaleNodes: 0.85,
@@ -103,6 +109,7 @@ class Network {
 			e.originalColor = e.color;
 		});
 
+		// Select nodes and neighbors when selecting a node
 		s.bind('clickNode', e => {
 			var nodeId = e.data.node.id;
 			var toKeep = s.graph.neighbors(nodeId);
@@ -123,13 +130,10 @@ class Network {
 					e.color = 'rgba(170,170,170,0.5)';
 				}
 			});
-
-			// Since the data has been modified, we need to
-			// call the refresh method to make the colors
-			// update effective.
 			s.refresh();
 		});
 
+		// Restore original colors after deselection
 		s.bind('clickStage', function(e) {
 			s.graph.nodes().forEach(function(n) {
 			  n.color = n.originalColor;
@@ -139,7 +143,6 @@ class Network {
 			  e.color = e.originalColor;
 			});
 	
-			// Same as in the previous event:
 			s.refresh();
 		});
 

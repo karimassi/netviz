@@ -1,7 +1,4 @@
 //  code adapted from : https://bl.ocks.org/jrzief/70f1f8a5d066a286da3a1e699823470f
-
-// const { duration } = require("moment");
-
 class RacingBarsAudio {
   constructor(svgElement) {
     this.svg = svgElement;

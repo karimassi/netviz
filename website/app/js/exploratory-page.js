@@ -121,6 +121,10 @@ class ExploratoryTool {
    * Displays the given data in the predefined way in the bar plot and the side boxes
    */
   displayData(data) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> b59de7c2f9be3347f340f3450276209f5e8d5169
     if(data['audioCount'] === undefined) {
       data['audioCount'] = {};
     }
