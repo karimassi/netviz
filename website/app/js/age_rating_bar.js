@@ -250,6 +250,12 @@ class AgeRatingDistributionPlot {
     }
 
     this.yTickValues.forEach(value => {
+      if(isNaN(data[value].movies)) {
+        data[value].movies = 0;
+      }
+      if(isNaN(data[value].shows)) {
+        data[value].shows = 0;
+      }
       setupTooltip(this.bars[value].movies, data[value].movies);
       this.bars[value].movies
         .transition(transition)
@@ -306,38 +312,6 @@ $(() => {
     const year = parseInt($('#content-year-option').val());
     plot.updateData(stats_for_year[year]);
   });
-
-
-
-
-
-  // let i = 0;
-  // const iterval = setInterval(() => {
-  //   console.log(1);
-  //   i++;
-  //   if(i >= 10) {
-  //     interval.clearInterval();
-  //   }
-  // }, 500);
-
-
-
-  // const dateFormatter = date => {
-  //   let month = date.getMonth() + 1;
-  //   const year = date.getFullYear();
-  //   if(month < 10) {
-  //     month = `0${month}`;
-  //   }
-  //   return `${month}-${year}`
-  // };
-  //
-  // const a = new TimeSelector(
-  //   'content-time-selection',
-  //   [new Date('01-01-2015'), new Date('05-30-2021')],
-  //   console.log,
-  //   5000,
-  //   'date',
-  //   dateFormatter);
 
 
 });

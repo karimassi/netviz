@@ -58,6 +58,7 @@ h2 {
 
   .section-body {
     text-align: center;
+    color: whitesmoke;
   }
 }
 
@@ -93,17 +94,16 @@ h2 {
 #preface {
   position: relative;
 }
-  
-#preface::after {  
+
+#preface::after {
   position: absolute;
   margin-top: 20px;
   left: 50%;
-  width: 100px;
-  margin-left: -50px;
+  width: 200px;
+  margin-left: -100px;
   display:block;
   color: whitesmoke;
   text-align: center;
   font-size: 7em;
   content: '\1F37F';
 }
-  

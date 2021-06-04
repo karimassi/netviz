@@ -112,9 +112,9 @@ class TimeSelector {
     if(value != this.lastEmit) {
       this.onPercentageSelectedCallback(value);
     }
-    else {
-      console.log('Same', this.lastEmit);
-    }
+    // else {
+    //   console.log('Same', this.lastEmit);
+    // }
     switch(this.scalingType) {
       case 'date':
         this.lastEmit = new Date(value.getTime());
@@ -320,14 +320,3 @@ class TimeSelector {
     }
   }
 }
-
-// $(() => {
-//   new TimeSelector(
-//     'test-player',
-//     [new Date('04-14-2015'), new Date('05-20-2020')],
-//     console.log,
-//     10000,
-//     'date',
-//     date => `${date.getDate()}. ${date.getMonth() + 1}. ${date.getFullYear()}.`
-//   )
-// });
