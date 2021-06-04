@@ -43,21 +43,24 @@ h2 {
       padding-bottom: 5px;
       &::after {
         font-family: 'Glyphicons Halflings';
-        content: "ℵ";
+        // font-family: monospace;
+        content: "\e003";
         color: whitesmoke;
+        text-align: center;
         background-color: #000000;
         position: absolute;
         padding: 0 3px;
         font-size: 0.7em;
-        width: 30px;
+        width: 35px;
         left: calc(50% - 15px);
-        top: 33px;
+        top: 36px;
       }
     }
   }
 
   .section-body {
     text-align: center;
+    color: whitesmoke;
   }
 }
 
@@ -90,20 +93,23 @@ h2 {
   margin-right: auto;
 }
 
+.animated-counter {
+  margin: 10px 0;
+}
+
 #preface {
   position: relative;
 }
-  
-#preface::after {  
+
+#preface::after {
   position: absolute;
   margin-top: 20px;
   left: 50%;
-  width: 100px;
-  margin-left: -50px;
+  width: 200px;
+  margin-left: -100px;
   display:block;
   color: whitesmoke;
   text-align: center;
   font-size: 7em;
   content: '\1F37F';
 }
-  

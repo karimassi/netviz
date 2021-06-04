@@ -1,3 +1,9 @@
-.abc h2::after {
-  content:"\2212" !important;
+#fullpage > .section {
+  .masks-undericon h2::after {
+     content: '\1F3AC';
+  }
+
+  .magnifier-undericon h2::after {
+    content: '\1F50D';
+  }
 }

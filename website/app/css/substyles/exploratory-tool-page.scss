@@ -1,0 +1,43 @@
+#exploratory-tool-page {
+  #exporatory-time-selection {
+    margin-bottom: 20px;
+  }
+
+  .highest-rated-content {
+    padding: 0;
+    ol {
+      text-align: left;
+       padding-left: 20px;
+
+      li::marker {
+        color: #DB0000;
+      }
+
+      li {
+        
+      }
+    }
+  }
+
+  .map {
+    height: 400px;
+  }
+
+  .bar-plots {
+    div {
+      padding: 0;
+    }
+  }
+
+  .section-body {
+    color: whitesmoke;
+    h3 {
+      color: #DB0000;
+    }
+  }
+
+  .section-heading {
+    margin: 0 !important;
+  }
+
+}

@@ -1,5 +1,5 @@
 class RangeSelector {
-  constructor(id, points, callback) {
+  constructor(id, points, callback, dateFormatter) {
     this.svg = d3.select(`#${id}`);
     this.id = id;
     this.points = points;
@@ -11,6 +11,7 @@ class RangeSelector {
     this.draggedSide = undefined;
     this.positionToDateScaling = undefined;
     this.callback = callback;
+    this.dateFormatter = dateFormatter;
     this.setup();
   }
 
@@ -51,7 +52,7 @@ class RangeSelector {
     let position = this.percentScaling(percentage);
 
     if(minDistanceCheck) {
-      const MIN_DISTANCE = 20;
+      const MIN_DISTANCE = 40;
       switch(side) {
         case 'right':
           position = Math.max(
@@ -75,7 +76,16 @@ class RangeSelector {
       .attr('x2', position);
 
     tools.triangle
-      .attr('transform', `translate(${position} 8) rotate(180)`);
+      .attr('transform', `translate(${position} 18) rotate(180)`);
+
+    tools.display
+      .attr('transform', `translate(${position} 7)`)
+
+    tools.displayText
+      .attr('transform', `translate(${position} 8)`);
+
+    tools.displayText
+      .text(this.dateFormatter(this.positionToDateScaling(position)));
 
     this.updateSelectionRect();
   }
@@ -152,12 +162,12 @@ class RangeSelector {
 
     const scaleY = d3.scaleLinear()
       .domain([0, maxCount])
-      .range([40, 20]);
+      .range([50, 30]);
 
     const area = d3.area()
       .curve(d3.curveCatmullRom.alpha(0.5))
       .x(d => scaleX(d.month))
-      .y0(40)
+      .y0(50)
       .y1(d => scaleY(d.count));
 
     this.plot = this.svg.append('path')
@@ -167,7 +177,7 @@ class RangeSelector {
 
     this.selectionRect = this.svg.append('rect')
       .attr('x', 100)
-      .attr('y', 10)
+      .attr('y', 20)
       .attr('width', 100)
       .attr('height', 30)
       .attr('fill', 'rgba(255, 0, 0, .2)');
@@ -175,35 +185,73 @@ class RangeSelector {
     const leftLine = this.svg.append('line')
       .attr('x1', 0)
       .attr('x2', 0)
-      .attr('y1', 7)
-      .attr('y2', 40)
+      .attr('y1', 17)
+      .attr('y2', 50)
       .attr('stroke', 'whitesmoke')
       .style('stroke-dasharray', '3, 1');
 
     const rightLine = this.svg.append('line')
       .attr('x1', 500)
       .attr('x2', 500)
-      .attr('y1', 7)
-      .attr('y2', 40)
+      .attr('y1', 17)
+      .attr('y2', 50)
       .attr('stroke', 'whitesmoke')
       .style('stroke-dasharray', '3, 1');
 
     const leftTriangle = this.svg.append('path')
       .attr('d', d3.symbol().type(d3.symbolTriangle).size(20))
       .attr('fill', 'whitesmoke')
-      .attr('transform', 'translate(100 8) rotate(180)');
+      .attr('transform', 'translate(100 18) rotate(180)');
 
     const rightTriangle = this.svg.append('path')
       .attr('d', d3.symbol().type(d3.symbolTriangle).size(20))
       .attr('fill', 'whitesmoke')
-      .attr('transform', 'translate(200 8) rotate(180)');
+      .attr('transform', 'translate(200 18) rotate(180)');
+
+    const leftDisplay = this.svg.append('rect')
+      .attr('x', -20)
+      .attr('y', -3)
+      .attr('width', 40)
+      .attr('height', 13)
+      .attr('fill', 'white')
+      .attr('rx', 4)
+      .attr('transform', 'translate(0 0)');
+
+    const rightDisplay = this.svg.append('rect')
+      .attr('x', -20)
+      .attr('y', -3)
+      .attr('width', 40)
+      .attr('height', 13)
+      .attr('fill', 'white')
+      .attr('rx', 4)
+      .attr('transform', 'translate(0 0)');
+
+    const leftDisplayText = this.svg.append('text')
+      .attr('fill', 'black')
+      .style('font-size', '.39em')
+      .style('user-select', 'none')
+      .style('text-anchor', 'middle')
+      .style('alignment-baseline', 'hanging')
+      .text('01-01-1970');
+
+    const rightDisplayText = this.svg.append('text')
+      .attr('fill', 'black')
+      .style('font-size', '.39em')
+      .style('user-select', 'none')
+      .style('text-anchor', 'middle')
+      .style('alignment-baseline', 'hanging')
+      .text('01-01-1970');
 
     this.selectionTools = {
       left: {
+        displayText: leftDisplayText,
+        display: leftDisplay,
         line: leftLine,
         triangle: leftTriangle
       },
       right: {
+        displayText: rightDisplayText,
+        display: rightDisplay,
         line: rightLine,
         triangle: rightTriangle
       }
@@ -213,13 +261,14 @@ class RangeSelector {
     this.moveSelectionTool('right', 1);
 
     this.svg
-      .selectAll('text')
+      .selectAll('text.years')
       .data([2015, 2016, 2017, 2018, 2019, 2020, 2021])
       .enter()
       .append('text')
+        .attr('class', 'years')
         .attr('fill', 'whitesmoke')
         .attr('x', year => scaleX(new Date(`01-01-${year}`)))
-        .attr('y', 44)
+        .attr('y', 54)
         .style('font-size', '.5em')
         .style('user-select', 'none')
         .style('text-anchor', 'middle')
@@ -232,31 +281,15 @@ class RangeSelector {
     d3.select('body')
       .on(`mousemove.${this.id}`, () => this.handleMouseMove())
       .on(`mouseup.${this.id}`, () => this.handleMouseUp());
+
+    this.emitPosition();
   }
 
   setup() {
-    const [sizeX, sizeY] = [500, 55];
-    const [marginX] = [10];
+    const [sizeX, sizeY] = [500, 65];
+    const [marginX] = [30];
     this.svg.attr('viewBox', `0 0 ${sizeX} ${sizeY}`);
 
     this.createPlot(sizeX, sizeY, marginX);
   }
 }
-
-$(() => {
-  d3.csv('data/release_density_per_month.csv').then(data => {
-    const points = [];
-
-    for(let i = 0; i < data.length; i++) {
-      points.push({
-        month: new Date(data[i]['release month']),
-        count: data[i]['count']
-      });
-    }
-
-    const selector = new RangeSelector(
-      'exporatory-time-selection',
-      points,
-      (left, right) => console.log(`${left}, ${right}`));
-  });
-});
