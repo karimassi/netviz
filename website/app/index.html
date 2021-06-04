@@ -57,38 +57,24 @@
             </div>
           </div>
         </div>
-        <!-- INTRODUCTION -->
+        <!-- COUTNER -->
         <div class="section">
           <div class="container">
             <div class="section-heading">
-              <h2>Busiest month</h2>
+              <h2>Introduction</h2>
             </div>
             <div class="section-body">
               <div class="left-justified-text" style="max-width: 1000px; margin: 10px auto;">
-                You probably know Netflix plans their releases way ahead, and that’s no secret. 
-                What you might not know, however, is that there are months during which they tend to release more, or less content than usual. 
-                <br><br>
                 Think twice before endlessly scrolling down and hoping to find what you’re looking for, Netflix’s catalogue is enormous. 
+                <br><br>
                 Next thing you know it’ll be time for bed, we warned you! If you’ve ever wondered why there are much more movies than TV shows, 
                 don’t forget the streaming service started out as an online DVD-rental in the United States.
+                <br><br>
                 Chances are you probably do not live there but still can access the platform. That’s because in 2010, they started expanding 
                 their services to different regions of the world. Are all parts of the world watching the same anglophone content? Definitely not. 
               </div>
-              <div style="color: whitesmoke; text-align: center" id = "busiest-month"></div>
-              <div>
-                <svg id = "busiest-month" height = "400px" width = "100%"></svg>
-              </div>
-              </br>
-              <div class="row plot-subtitle">
-                <div class="col-md-1 col-3 pl-4 my-auto plot-description" style="text-align: center">
-                  <i class="bi bi-info-circle-fill"></i>
-                </div>
-                <div class="col-9 my-auto plot-description">
-                  Number of movies and TV show releases per month
-                </div>
-              </div>
-              <br>
-              <div class="row">
+              <br><br>
+              <div class="row pt-5">
                 <div class="col-12 col-sm-3 col-vl-3">
                   <div class="animated-counter">
                     <h4>Movies</h4>
@@ -124,6 +110,34 @@
                       <br></br>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- BUSIEST MONTH -->
+        <div class="section">
+          <div class="container">
+            <div class="section-heading">
+              <h2>Busiest month</h2>
+            </div>
+            <div class="section-body">
+              <div class="center-justified-text" style="max-width: 1000px; margin: 10px auto;">
+                You probably know Netflix plans their releases way ahead, and that’s no secret. 
+                What you might not know, however, is that there are months during which they tend to release more, or less content than usual. 
+              </div>
+              <br><br>
+              <div style="color: whitesmoke; text-align: center" id = "busiest-month"></div>
+              <div>
+                <svg id = "busiest-month" height = "450px" width = "100%"></svg>
+              </div>
+              </br>
+              <div class="row plot-subtitle">
+                <div class="col-md-1 col-3 pl-4 my-auto plot-description" style="text-align: center">
+                  <i class="bi bi-info-circle-fill"></i>
+                </div>
+                <div class="col-9 my-auto plot-description">
+                  Number of movies and TV show releases per month
                 </div>
               </div>
             </div>
@@ -198,7 +212,7 @@
                   <i class="bi bi-info-circle-fill"></i>
                 </div>
                 <div class="col-9 my-auto plot-description">
-                  Network of movie co-occurences, according to actors. Select a movie to start!
+                  Network of movie co-occurences, according to actors. <br>Select a movie to start! Click outside the graph to deselect.
                 </div>
               </div>
             </div>
@@ -255,6 +269,14 @@
               </div>
               <br></br>
               <svg id = "mood" width = "100%"></svg>
+              <div class="row plot-subtitle">
+                <div class="col-md-1 col-3 pl-4 my-auto plot-description" style="text-align: center">
+                  <i class="bi bi-info-circle-fill"></i>
+                </div>
+                <div class="col-9 my-auto plot-description">
+                  Repartitions of items released per genres across all months. Hover on a line to get started!
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -338,6 +360,7 @@
       "Home",
       "Preface", 
       "Introduction",
+      "Months",
       "Languages",
       "Worldwide",
       "Interconnected",
@@ -346,8 +369,9 @@
       "Genres",
       "Exploratory Tool"
     ];
-    var intro_loaded = false;
-    var languages_loaded = false;
+    var counter_loaded = false;
+    var months_loaded = false;
+
 
     $("#fullpage").fullpage({
       navigation: true,
@@ -364,13 +388,8 @@
         return '#000000';
       }),
       afterLoad : function(origin, destination, direction) {
-        if ((destination == 3) && !(intro_loaded)) {
-          intro_loaded = true;
-          let svg = d3.select('svg#busiest-month') ;
-          svg.attr('visibility', 'visible');
-          let data_path = "data/busiest_month.csv";
-          instentiateBusiestMonth(svg, data_path) ;
-
+        if ((destination == 3) && !(counter_loaded)) {
+          counter_loaded = true;
           instantiateCounter(20211,
             d3.select('svg#counter-movies').attr('visibility', 'visible'));
 
@@ -381,6 +400,13 @@
             d3.select('svg#counter-countries').attr('visibility', 'visible'));
           instantiateCounter(95,
             d3.select('svg#counter-audio').attr('visibility', 'visible'));
+        }
+        if ((destination == 4) && !(months_loaded)) {
+          months_loaded = true;
+          let svg = d3.select('svg#busiest-month') ;
+          svg.attr('visibility', 'visible');
+          let data_path = "data/busiest_month.csv";
+          instentiateBusiestMonth(svg, data_path) ;
         }
       },
       afterRender: () => {

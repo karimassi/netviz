@@ -86,7 +86,7 @@ class BusiestMonthStackedBarPlot {
 
     setup() {
         this.width = 1350 ;
-        this.height = 350;
+        this.height = 400;
         this.svg.attr('viewBox', `0 0 ${this.width} ${this.height}`);
 
         this.initiateBars() ;
