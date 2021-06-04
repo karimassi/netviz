@@ -157,11 +157,9 @@ d3.sankey = function() {
     function computeNodeDepths(iterations) {
       var nodesByBreadth = d3.nest()
           .key(function(d) { return d.x; })
-          //.sortKeys(d3.ascending)
           .entries(nodes)
           .map(function(d) { return d.values; });
   
-      //
       initializeNodeDepth();
       resolveCollisions();
       for (var alpha = 1; iterations > 0; --iterations) {
@@ -257,10 +255,6 @@ d3.sankey = function() {
     }
   
     function computeLinkDepths() {
-      /* nodes.forEach(function(node) {
-        node.sourceLinks.sort(ascendingTargetDepth);
-        node.targetLinks.sort(ascendingSourceDepth);
-      }); */
       nodes.forEach(function(node) {
         var sy = 0, ty = 0;
         node.sourceLinks.forEach(function(link) {

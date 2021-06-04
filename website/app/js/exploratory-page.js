@@ -107,14 +107,12 @@ class ExploratoryTool {
   }
 
   displayData(data) {
-    // this.fillAudioWithNonAppearing(data['audioCount']);
 
     if(data['audioCount'] === undefined) {
       data['audioCount'] = {};
     }
     this.fillAudioPlot(data['audioCount']);
 
-    // this.showMovieBarPlot.updateData(data['numberOfTitles']);
     this.sideBar.html(`
       Top movies:
       <ol>

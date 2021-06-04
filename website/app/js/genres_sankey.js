@@ -1,7 +1,4 @@
 // code adapted from https://bl.ocks.org/d3noob/06e72deea99e7b4859841f305f63ba85
-
-
-
 class SankeyMood {
     constructor(svgElement) {
         this.svg = svgElement;

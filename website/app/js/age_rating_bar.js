@@ -114,8 +114,6 @@ class AgeRatingDistributionPlot {
       .attr('x', distanceFromMiddle)
       .attr('height', BAR_HEIGHT)
       .attr('width', this.barWidth(0));
-      // .on('mouseover', d => handleBarMouseOver(d, middle_bar))
-      // .on('mouseout', d => handleBarMouseOut(d));
 
     const movieBars = values.append('rect')
       .attr('fill', this.defaultBarColor)
@@ -123,8 +121,6 @@ class AgeRatingDistributionPlot {
       .attr('x', point => -(distanceFromMiddle + this.barWidth(0)))
       .attr('height', BAR_HEIGHT)
       .attr('width', this.barWidth(0));
-      // .on('mouseover', d => handleBarMouseOver(d, middle_bar))
-      // .on('mouseout', d => handleBarMouseOut(d));
 
     const getManipulableElements = selection => selection._groups[0];
     this.yTickValues.forEach((value, index) => {
@@ -216,7 +212,6 @@ class AgeRatingDistributionPlot {
           .attr('height', textSize.height + 2 * padding.y);
         TOOLTIP_GROUP
           .style('visibility', 'visible');
-        // d3.select().style('visibility', 'visible');
       };
 
       const handleMouseOut = function(d) {
