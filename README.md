@@ -1,37 +1,27 @@
-# Project of Data Visualization (COM-480)
+# Netviz
 
-| Student's name | SCIPER |
-| -------------- | ------ |
-| Karim Assi | 274518 |
-| Eloïse Doyard | 272300 |
-| Milos Vujasinovic | 322537 |
+## Motivation
 
-[Milestone 1](milestones/milestone1.md) • [Milestone 2](milestones/milestone2.md) • [Milestone 3](#milestone-3)
+Ten years ago Netflix was only present in the United States. Nowadays, the world-wide streaming platform is available in more than 190 countries. Its catalogue is rapidly growing not only to catch up with recent movies and TV shows releases, but also to adapt their content to the local market by producing original content.
 
-## Milestone 1 (23rd April, 5pm)
+They gradually made their services available in different parts of the world, which in turn created demand and introduced new kinds of viewers. Doing so allowed the company to update their business model. On the one hand, they started collaborating with local studios offering new original content. On the other hand, they made available existing local content to their global audience.
 
-**10% of the final grade**
+We expect that the evolution of their library reflects this strategy. We are therefore interested in studying how Netflix's release strategy evolved during the last decade.
 
-- [Report](milestones/milestone1.md)
-- Exploratory data analysis([notebook](milestones/eda.ipynb), [markdown](milestones/eda.md))
+## Context
 
-## Milestone 2 (7th May, 5pm)
+This project has be carried out in the scope of a data visualization class at EPFL. It was divided into multiple milestones. 
 
-**10% of the final grade**
+- In the [first milestone](milestones/milestone1.md), we defined our project, scraped the data, and then performed an [exploratory data analysis](milestones/eda.md).
+- In the [second milestone](milestones/milestone2.md), we sketched the website and the visualizations in detail.
+- In the final milestone, we built the final product and wrote the [process book](milestones/ProcessBook.pdf).
 
-- [Report](milestones/milestone2.md) (best visualized using Github's markdown preview)
-- The website is available [here](https://com-480-data-visualization.github.io/data-visualization-project-2021-d3-musketeers/). Note: it is a work in progress, and the visualizations do not use real data and are not final. For a better experience, we recommend using Google Chrome to browse it.
+The final product is available [here](karimassi.github.io/netviz). For a better experience, we recommend using Google Chrome or Edge from a computer to browse it. This ensures a smoother and more enjoyable experience. We recorded a screecast showcasing our website and its scenario and it's available [here](https://youtu.be/-1IZJbK5wSM).
 
-## Milestone 3 (4th June, 5pm)
+## Authors
 
-**80% of the final grade**
+The contributors to this project are:
 
-- Our process book is available [here](milestones/ProcessBook.pdf), 
-- Our screencast is available [here](https://youtu.be/-1IZJbK5wSM), 
-- The website is available [here](https://com-480-data-visualization.github.io/data-visualization-project-2021-d3-musketeers/). For a better experience, we recommend using Google Chrome or Edge from a computer to browse it. This ensures a smoother and more enjoyable experience. 
-
-
-## Late policy
-
-- < 24h: 80% of the grade for the milestone
-- < 48h: 70% of the grade for the milestone
+- [Karim Assi](https://github.com/karimassi) 
+- [Eloïse Doyard](https://github.com/EloDoyard)
+- [Milos Vujasinovic](https://github.com/mvujas)
